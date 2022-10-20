@@ -12,5 +12,6 @@ Simple reservation system for coaches and their trainees. A coach can set his op
 - Counting all coaches profits.
 - Selecting all trainees trainings that he attended to.
 - Select only coaches trainings that are booked by any trainee.
+- multiple trainees can attend a single training
 ## Database
 <img src="./images/diagram.png">
