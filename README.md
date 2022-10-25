@@ -8,10 +8,12 @@ Simple reservation system for coaches and their trainees. A coach can set his op
 - Both coach and trainee can delete a planned training.
 - Coach can alter the cost rate of each training.
 ## More complex query
-- Selecting all trainings in specific time range for a coach.
-- Counting all coaches profits.
-- Selecting all trainees trainings that he attended to.
-- Select only coaches trainings that are booked by any trainee.
+- Selecting most active trainees in a specific time range in relation to specific coach.
+	-  Selects all trainings that are in specific time range.
+	- Filters out trainings that are not organized by a specified coach.
+	- Selects the most active trainee from the previous result.
+## Details
 - multiple trainees can attend a single training
+
 ## Database
 <img src="./images/diagram.png">
