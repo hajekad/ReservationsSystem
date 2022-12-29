@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS trainee_training CASCADE;
 CREATE TABLE coach (
     id_coach SERIAL NOT NULL,
     cost_rate INTEGER NOT NULL,
+    second_name VARCHAR(256) NOT NULL,
+    first_name VARCHAR(256) NOT NULL,
     sport VARCHAR(256) NOT NULL,
     password VARCHAR(256) NOT NULL,
     email VARCHAR(256) NOT NULL
@@ -24,6 +26,8 @@ ALTER TABLE place ADD CONSTRAINT pk_place PRIMARY KEY (id_place);
 
 CREATE TABLE trainee (
     id_trainee SERIAL NOT NULL,
+    second_name VARCHAR(256) NOT NULL,
+    first_name VARCHAR(256) NOT NULL,
     username VARCHAR(256) NOT NULL,
     email VARCHAR(256) NOT NULL,
     password VARCHAR(256) NOT NULL,
@@ -35,7 +39,7 @@ CREATE TABLE training (
     id_training SERIAL NOT NULL,
     id_coach INTEGER NOT NULL,
     id_place INTEGER NOT NULL,
-    date TIMESTAMP NOT NULL,
+    date_of_training TIMESTAMP NOT NULL,
     description VARCHAR(256) NOT NULL
 );
 ALTER TABLE training ADD CONSTRAINT pk_training PRIMARY KEY (id_training, id_coach);
