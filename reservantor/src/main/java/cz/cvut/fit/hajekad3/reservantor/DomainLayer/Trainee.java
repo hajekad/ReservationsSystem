@@ -1,19 +1,16 @@
-package cz.cvut.fit.hajekad3.DomainLayer;
+package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
 import jakarta.persistence.*;
 
 @Entity
-public class Coach {
+public class Trainee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_coach", nullable = false)
+    @Column(name = "id_trainee", nullable = false)
     private Long id;
 
-    @Column(name = "cost_rate", nullable = false)
-    private int costRate;
-
-    @Column(name = "sport", nullable = false)
-    private String sport;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -27,7 +24,10 @@ public class Coach {
     @Column(name = "second_name", nullable = false)
     private String secondName;
 
-    public Coach(){}
+    @Column(name = "skill_cap", nullable = false)
+    private String skillCap;
+
+    public Trainee(){}
 
     public Long getId() {
         return id;
@@ -37,20 +37,12 @@ public class Coach {
         this.id = id;
     }
 
-    public int getCostRate() {
-        return costRate;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCostRate(int costRate) {
-        this.costRate = costRate;
-    }
-
-    public String getSport() {
-        return sport;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -83,5 +75,13 @@ public class Coach {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public String getSkillCap() {
+        return skillCap;
+    }
+
+    public void setSkillCap(String skillCap) {
+        this.skillCap = skillCap;
     }
 }

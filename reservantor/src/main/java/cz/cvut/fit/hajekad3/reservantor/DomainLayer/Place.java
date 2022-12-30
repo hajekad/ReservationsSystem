@@ -1,4 +1,4 @@
-package cz.cvut.fit.hajekad3.DomainLayer;
+package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
 import jakarta.persistence.*;
 

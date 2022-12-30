@@ -1,41 +1,14 @@
-package cz.cvut.fit.hajekad3.DomainLayer;
+package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee;
 
-import jakarta.persistence.*;
-
-@Entity
-public class Trainee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_trainee", nullable = false)
-    private Long id;
-
-    @Column(name = "username", nullable = false)
+public class CreateTraineeDto {
     private String username;
-
-    @Column(name = "password", nullable = false)
     private String password;
-
-    @Column(name = "email", nullable = false)
     private String email;
-
-    @Column(name = "first_name", nullable = false)
     private String firstName;
-
-    @Column(name = "second_name", nullable = false)
     private String secondName;
-
-    @Column(name = "skill_cap", nullable = false)
     private String skillCap;
 
-    public Trainee(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public CreateTraineeDto() {}
 
     public String getUsername() {
         return username;
@@ -85,3 +58,4 @@ public class Trainee {
         this.skillCap = skillCap;
     }
 }
+
