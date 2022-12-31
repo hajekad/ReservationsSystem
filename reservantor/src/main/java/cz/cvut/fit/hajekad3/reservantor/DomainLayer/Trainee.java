@@ -1,5 +1,7 @@
 package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.CreateTraineeDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
 import jakarta.persistence.*;
 
 @Entity
@@ -25,9 +27,45 @@ public class Trainee {
     private String secondName;
 
     @Column(name = "skill_cap", nullable = false)
-    private String skillCap;
+    private int skillCap;
 
     public Trainee(){}
+
+    public Trainee(CreateTraineeDto traineeDto)
+    {
+        setEmail(traineeDto.getEmail());
+        setPassword(traineeDto.getPassword());
+        setFirstName(traineeDto.getFirstName());
+        setSecondName(traineeDto.getSecondName());
+        setUsername(traineeDto.getUsername());
+        setSkillCap(50);
+    }
+
+    public TraineeDto convertToDto()
+    {
+        TraineeDto ret = new TraineeDto();
+
+        ret.setId(getId());
+        ret.setEmail(getEmail());
+        ret.setPassword(getPassword());
+        ret.setFirstName(getFirstName());
+        ret.setSecondName(getSecondName());
+        ret.setUsername(getUsername());
+        ret.setSkillCap(getSkillCap());
+
+        return ret;
+    }
+
+    public void fill()
+    {
+        setId(420L);
+        setEmail("tvojemama@mail.org");
+        setPassword("123abc");
+        setFirstName("Lucie");
+        setSecondName("Noci upije");
+        setUsername("Lucka");
+        setSkillCap(12);
+    }
 
     public Long getId() {
         return id;
@@ -77,11 +115,11 @@ public class Trainee {
         this.secondName = secondName;
     }
 
-    public String getSkillCap() {
+    public int getSkillCap() {
         return skillCap;
     }
 
-    public void setSkillCap(String skillCap) {
+    public void setSkillCap(int skillCap) {
         this.skillCap = skillCap;
     }
 }

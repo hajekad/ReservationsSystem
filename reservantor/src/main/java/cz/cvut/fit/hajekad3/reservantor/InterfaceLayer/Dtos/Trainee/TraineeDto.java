@@ -1,6 +1,7 @@
 package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee;
 
-public class CreateTraineeDto {
+public class TraineeDto {
+    private Long id;
     private String username;
     private String password;
     private String email;
@@ -8,7 +9,7 @@ public class CreateTraineeDto {
     private String secondName;
     private int skillCap;
 
-    public CreateTraineeDto() {}
+    public TraineeDto() {}
 
     public String getUsername() {
         return username;
@@ -57,5 +58,12 @@ public class CreateTraineeDto {
     public void setSkillCap(int skillCap) {
         this.skillCap = skillCap;
     }
-}
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+}

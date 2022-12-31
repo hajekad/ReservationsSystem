@@ -1,6 +1,8 @@
 package cz.cvut.fit.hajekad3.reservantor.Api.Controllers;
 
 import cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations.TraineeService;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.CreateTraineeDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +20,13 @@ public class TraineeController {
     public TraineeController() {}
 
     @PostMapping
-    public void postTrainee()
-    {
-        System.out.println("Hello world!");
+    public TraineeDto postTrainee(CreateTraineeDto traineeDto) {
+        return traineeService.saveTrainee(traineeDto);
     }
 
     @GetMapping
-    public String getTrainee()
-    {
-        return traineeService.getTrainee();
+    public TraineeDto getTrainee(Long id) {
+
+        return traineeService.getTrainee(id);
     }
 }
