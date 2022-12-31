@@ -4,11 +4,13 @@ import cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations.Trainee
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.CreateTraineeDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/trainee")
@@ -20,13 +22,27 @@ public class TraineeController {
     public TraineeController() {}
 
     @PostMapping
-    public TraineeDto postTrainee(CreateTraineeDto traineeDto) {
+    public TraineeDto postTrainee(@RequestBody CreateTraineeDto traineeDto) {
+        System.out.print("Api received a post request for user: ");
+        System.out.println(traineeDto.getUsername());
+
         return traineeService.saveTrainee(traineeDto);
     }
 
     @GetMapping
-    public TraineeDto getTrainee(Long id) {
+    public ResponseEntity getTrainee(@RequestParam Long id) {
+        System.out.print("Api received a get request for user_id: ");
+        System.out.println(id);
 
-        return traineeService.getTrainee(id);
+        TraineeDto ret;
+
+        try{
+            ret = traineeService.getTrainee(id);
+        }
+        catch (NoSuchElementException e) {
+            return ResponseEntity.badRequest().body("Error: trainee not found with id " + id);
+        }
+
+        return ResponseEntity.ok(ret);
     }
 }

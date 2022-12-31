@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Trainee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id_trainee", nullable = false)
+    @Column(name = "id_trainee")
     private Long id;
 
     @Column(name = "username", nullable = false)
