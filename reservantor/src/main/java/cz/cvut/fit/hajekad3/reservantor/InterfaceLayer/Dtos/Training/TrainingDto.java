@@ -11,7 +11,7 @@ public class TrainingDto {
 
     private Date dateOfTraining;
 
-    private Date description;
+    private String description;
 
     public TrainingDto() {}
 
@@ -47,11 +47,11 @@ public class TrainingDto {
         this.dateOfTraining = dateOfTraining;
     }
 
-    public Date getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Date description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 }

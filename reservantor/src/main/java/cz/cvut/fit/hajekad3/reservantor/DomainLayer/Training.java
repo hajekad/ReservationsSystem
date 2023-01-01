@@ -23,7 +23,7 @@ public class Training {
     private Date dateOfTraining;
 
     @Column(name = "description", nullable = false)
-    private Date description;
+    private String description;
 
     public Training() {}
 
@@ -78,11 +78,11 @@ public class Training {
         this.dateOfTraining = dateOfTraining;
     }
 
-    public Date getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Date description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 }
