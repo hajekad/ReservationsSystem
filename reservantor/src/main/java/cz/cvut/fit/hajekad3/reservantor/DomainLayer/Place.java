@@ -1,5 +1,7 @@
 package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +17,22 @@ public class Place {
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
-    public Place(){}
+    public Place() {}
+
+    public Place(CreatePlaceDto placeDto) {
+        setLatitude(placeDto.getLatitude());
+        setLongitude(placeDto.getLongitude());
+    }
+
+    public PlaceDto convertToDto() {
+        PlaceDto ret = new PlaceDto();
+
+        ret.setId(getId());
+        ret.setLatitude(getLatitude());
+        ret.setLongitude(getLongitude());
+
+        return ret;
+    }
 
     public Long getId() {
         return id;

@@ -1,5 +1,8 @@
 package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CoachDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CreateCoachDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
 import jakarta.persistence.*;
 
 @Entity
@@ -28,6 +31,29 @@ public class Coach {
     private String secondName;
 
     public Coach(){}
+
+    public Coach(CreateCoachDto coachDto) {
+        setCostRate(coachDto.getCostRate());
+        setEmail(coachDto.getEmail());
+        setPassword(coachDto.getPassword());
+        setFirstName(coachDto.getFirstName());
+        setSecondName(coachDto.getSecondName());
+        setSport(coachDto.getSport());
+    }
+
+    public CoachDto convertToDto() {
+        CoachDto ret = new CoachDto();
+
+        ret.setId(getId());
+        ret.setCostRate(getCostRate());
+        ret.setEmail(getEmail());
+        ret.setPassword(getPassword());
+        ret.setFirstName(getFirstName());
+        ret.setSecondName(getSecondName());
+        ret.setSport(getSport());
+
+        return ret;
+    }
 
     public Long getId() {
         return id;

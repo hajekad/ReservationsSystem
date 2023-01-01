@@ -1,5 +1,7 @@
 package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.CreateTrainingDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -22,6 +24,27 @@ public class Training {
 
     @Column(name = "description", nullable = false)
     private Date description;
+
+    public Training() {}
+
+    public Training(CreateTrainingDto trainingDto) {
+        setDateOfTraining(trainingDto.getDateOfTraining());
+        setDescription(trainingDto.getDescription());
+        setIdCoach(trainingDto.getIdCoach());
+        setIdPlace(trainingDto.getIdPlace());
+    }
+
+    public TrainingDto convertToDto() {
+        TrainingDto ret = new TrainingDto();
+
+        ret.setId(getId());
+        ret.setDateOfTraining(getDateOfTraining());
+        ret.setDescription(getDescription());
+        ret.setIdCoach(getIdCoach());
+        ret.setIdPlace(getIdPlace());
+
+        return ret;
+    }
 
     public Long getId() {
         return id;
