@@ -1,12 +1,16 @@
 package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Coach;
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Trainee;
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepository;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CreateCoachDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CoachDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 @Service
@@ -14,8 +18,12 @@ public class CoachService {
     @Autowired
     private ICoachRepository coachRepository;
 
-    public CoachService(ICoachRepository coachRepository) {
+    @Autowired
+    private ITrainingRepository trainingRepository;
+
+    public CoachService(ICoachRepository coachRepository, ITrainingRepository trainingRepository) {
         this.coachRepository = coachRepository;
+        this.trainingRepository = trainingRepository;
     }
 
     public CoachDto saveCoach(CreateCoachDto coachDto) {
@@ -40,6 +48,18 @@ public class CoachService {
             throw new NoSuchElementException("Error: Coach does not exist. id: " + coachDto.getId());
 
         Coach currCoach = new Coach(coachDto);
+
+        ArrayList<Training> tmp = new ArrayList<Training>();
+        Training training = null;
+        for (Long i: coachDto.getTrainings()) {
+            training = trainingRepository.findById(i).orElse(null);
+
+            if(training == null)
+                throw new NoSuchElementException("Error: No such Trainee");
+
+            tmp.add(training);
+        }
+        currCoach.setTrainings(tmp);
 
         return coachRepository.save(currCoach).convertToDto();
     }

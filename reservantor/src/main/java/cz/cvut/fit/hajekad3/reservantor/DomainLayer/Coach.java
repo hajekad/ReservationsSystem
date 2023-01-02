@@ -5,6 +5,9 @@ import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CreateCoachDto
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Entity
 public class Coach {
     @Id
@@ -14,8 +17,6 @@ public class Coach {
 
     @Column(name = "cost_rate", nullable = false)
     private int costRate;
-
-
 
     @Column(name = "sport", nullable = false)
     private String sport;
@@ -32,9 +33,16 @@ public class Coach {
     @Column(name = "second_name", nullable = false)
     private String secondName;
 
-    public Coach(){}
+    @OneToMany
+    @Column(name = "trainings", nullable = true)
+    private Collection<Training> trainings;
+
+    public Coach(){
+        this.trainings = new ArrayList<Training>();
+    }
 
     public Coach(CreateCoachDto coachDto) {
+        this.trainings = new ArrayList<Training>();
         setCostRate(coachDto.getCostRate());
         setEmail(coachDto.getEmail());
         setPassword(coachDto.getPassword());
@@ -44,6 +52,7 @@ public class Coach {
     }
 
     public Coach(CoachDto coachDto) {
+        this.trainings = new ArrayList<Training>();
         setId(coachDto.getId());
         setCostRate(coachDto.getCostRate());
         setEmail(coachDto.getEmail());
@@ -55,6 +64,13 @@ public class Coach {
 
     public CoachDto convertToDto() {
         CoachDto ret = new CoachDto();
+
+        ArrayList<Long> tmp = new ArrayList<>();
+        for(Training i : this.trainings) {
+            tmp.add(i.getId());
+            System.out.println(i.getId());
+        }
+        ret.setTrainings(tmp);
 
         ret.setId(getId());
         ret.setCostRate(getCostRate());
@@ -121,5 +137,13 @@ public class Coach {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public Collection<Training> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(Collection<Training> trainings) {
+        this.trainings = trainings;
     }
 }

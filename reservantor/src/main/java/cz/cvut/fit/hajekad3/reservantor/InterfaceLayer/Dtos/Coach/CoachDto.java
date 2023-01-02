@@ -2,6 +2,9 @@ package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach;
 
 import jakarta.persistence.Column;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class CoachDto {
     private Long id;
     private int costRate;
@@ -10,6 +13,7 @@ public class CoachDto {
     private String email;
     private String firstName;
     private String secondName;
+    private Collection<Long> trainings;
 
     public CoachDto() {}
 
@@ -67,5 +71,13 @@ public class CoachDto {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    public Collection<Long> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(Collection<Long> trainings) {
+        this.trainings = trainings;
     }
 }
