@@ -1,16 +1,12 @@
 package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.CreateTrainingDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 @Entity
 public class Training {
@@ -62,8 +58,8 @@ public class Training {
         for (Trainee i: participatingTrainees) {
             tmp.add(i.getId());
         }
-
         ret.setParticipatingTraineesIds(tmp);
+
         ret.setId(getId());
         ret.setDateOfTraining(getDateOfTraining().toString());
         ret.setDescription(getDescription());

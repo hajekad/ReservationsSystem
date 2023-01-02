@@ -4,6 +4,9 @@ import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Entity
 public class Place {
     @Id
@@ -17,14 +20,20 @@ public class Place {
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
+    @OneToMany
+    @Column(name = "trainings", nullable = true)
+    private Collection<Training> trainings;
+
     public Place() {}
 
     public Place(CreatePlaceDto placeDto) {
+        trainings = new ArrayList<Training>();
         setLatitude(placeDto.getLatitude());
         setLongitude(placeDto.getLongitude());
     }
 
     public Place(PlaceDto placeDto) {
+        trainings = new ArrayList<Training>();
         setId(placeDto.getId());
         setLatitude(placeDto.getLatitude());
         setLongitude(placeDto.getLongitude());
@@ -32,6 +41,12 @@ public class Place {
 
     public PlaceDto convertToDto() {
         PlaceDto ret = new PlaceDto();
+
+        ArrayList<Long> tmp = new ArrayList<Long>();
+        for (Training i: trainings) {
+            tmp.add(i.getId());
+        }
+        ret.setTrainings(tmp);
 
         ret.setId(getId());
         ret.setLatitude(getLatitude());
@@ -62,5 +77,13 @@ public class Place {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Collection<Training> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(Collection<Training> trainings) {
+        this.trainings = trainings;
     }
 }

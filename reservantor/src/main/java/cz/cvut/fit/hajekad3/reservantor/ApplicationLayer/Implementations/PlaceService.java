@@ -1,12 +1,15 @@
 package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Place;
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepository;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 @Service
@@ -14,8 +17,12 @@ public class PlaceService {
     @Autowired
     private IPlaceRepository placeRepository;
 
-    public PlaceService(IPlaceRepository placeRepository) {
+    @Autowired
+    private ITrainingRepository trainingRepository;
+
+    public PlaceService(IPlaceRepository placeRepository, ITrainingRepository trainingRepository) {
         this.placeRepository = placeRepository;
+        this.trainingRepository = trainingRepository;
     }
 
     public PlaceDto savePlace(CreatePlaceDto placeDto) {
@@ -40,6 +47,18 @@ public class PlaceService {
             throw new NoSuchElementException("Error: Place does not exist. id: " + placeDto.getId());
 
         Place currPlace = new Place(placeDto);
+
+        ArrayList<Training> tmp = new ArrayList<Training>();
+        Training training = null;
+        for (Long i: placeDto.getTrainings()) {
+            training = trainingRepository.findById(i).orElse(null);
+
+            if(training == null)
+                throw new NoSuchElementException("Error: No such Trainee");
+
+            tmp.add(training);
+        }
+        currPlace.setTrainings(tmp);
 
         return placeRepository.save(currPlace).convertToDto();
     }

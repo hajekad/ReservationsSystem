@@ -5,12 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.Collection;
+
 public class PlaceDto {
     private Long id;
 
     private Double latitude;
 
     private Double longitude;
+
+    private Collection<Long> trainings;
 
     public PlaceDto(){}
 
@@ -36,5 +40,13 @@ public class PlaceDto {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Collection<Long> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(Collection<Long> trainings) {
+        this.trainings = trainings;
     }
 }

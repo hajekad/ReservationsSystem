@@ -1,5 +1,9 @@
 package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee;
 
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
+
+import java.util.Collection;
+
 public class TraineeDto {
     private Long id;
     private String username;
@@ -8,6 +12,7 @@ public class TraineeDto {
     private String firstName;
     private String secondName;
     private int skillCap;
+    private Collection<Long> trainings;
 
     public TraineeDto() {}
 
@@ -65,5 +70,13 @@ public class TraineeDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Collection<Long> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(Collection<Long> trainings) {
+        this.trainings = trainings;
     }
 }

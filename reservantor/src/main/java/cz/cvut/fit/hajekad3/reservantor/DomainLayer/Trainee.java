@@ -4,6 +4,9 @@ import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.CreateTraine
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 @Entity
 public class Trainee {
     @Id
@@ -29,10 +32,17 @@ public class Trainee {
     @Column(name = "skill_cap", nullable = false)
     private int skillCap;
 
-    public Trainee(){}
+    @ManyToMany
+    @Column(name = "trainings", nullable = true)
+    private Collection<Training> trainings;
+
+    public Trainee(){
+        trainings = new ArrayList<Training>();
+    }
 
     public Trainee(CreateTraineeDto traineeDto)
     {
+        trainings = new ArrayList<Training>();
         setEmail(traineeDto.getEmail());
         setPassword(traineeDto.getPassword());
         setFirstName(traineeDto.getFirstName());
@@ -43,6 +53,7 @@ public class Trainee {
 
     public Trainee(TraineeDto traineeDto)
     {
+        trainings = new ArrayList<Training>();
         setId(traineeDto.getId());
         setEmail(traineeDto.getEmail());
         setPassword(traineeDto.getPassword());
@@ -121,5 +132,13 @@ public class Trainee {
 
     public void setSkillCap(int skillCap) {
         this.skillCap = skillCap;
+    }
+
+    public Collection<Training> getTrainings() {
+        return trainings;
+    }
+
+    public void setTrainings(Collection<Training> trainings) {
+        this.trainings = trainings;
     }
 }
