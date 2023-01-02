@@ -3,13 +3,18 @@ package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Trainee;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepository;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryExtraMethods;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.CreateTraineeDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -18,11 +23,59 @@ public class TraineeService {
     private ITraineeRepository traineeRepository;
 
     @Autowired
-    private ITrainingRepository trainingRepository;
+    private ITrainingRepositoryJpa trainingRepositoryJpa;
 
-    public TraineeService(ITraineeRepository traineeRepository, ITrainingRepository trainingRepository) {
+    @Autowired
+    private ITrainingRepositoryExtraMethods trainingRepositoryExtraMethods;
+
+    private Trainee dtoToTrainee(TraineeDto traineeDto) {
+        Trainee ret = new Trainee(traineeDto);
+
+        ArrayList<Training> tmp = new ArrayList<Training>();
+        Training training = null;
+        for (Long i: traineeDto.getTrainings()) {
+            training = trainingRepositoryJpa.findById(i).orElse(null);
+
+            if(training == null)
+                throw new NoSuchElementException("Error: No such Training");
+
+            tmp.add(training);
+        }
+        ret.setTrainings(tmp);
+
+        return ret;
+    }
+
+    public TraineeService(ITraineeRepository traineeRepository, ITrainingRepositoryJpa trainingRepositoryJpa, ITrainingRepositoryExtraMethods trainingRepositoryExtraMethods) {
         this.traineeRepository = traineeRepository;
-        this.trainingRepository = trainingRepository;
+        this.trainingRepositoryJpa = trainingRepositoryJpa;
+        this.trainingRepositoryExtraMethods = trainingRepositoryExtraMethods;
+    }
+
+    public TrainingDto assignTraining(String fromString, String toString, TraineeDto traineeDto) {
+        Timestamp from = Timestamp.valueOf(fromString);
+        Timestamp to = Timestamp.valueOf(toString);
+        Trainee trainee = dtoToTrainee(traineeDto);
+        List<Training> availableTrainings = trainingRepositoryExtraMethods.trainingsInTimeframe(from, to);
+
+        if(availableTrainings.isEmpty())
+            throw new NoSuchElementException();
+
+        Training chosenTraining = availableTrainings.get(0);
+
+        Collection<Training> newTrainingList = trainee.getTrainings();
+        Collection<Trainee> newTraineeList = chosenTraining.getParticipatingTrainees();
+
+        newTrainingList.add(chosenTraining);
+        newTraineeList.add(trainee);
+
+        chosenTraining.setParticipatingTrainees(newTraineeList);
+        trainee.setTrainings(newTrainingList);
+
+        trainingRepositoryJpa.save(chosenTraining);
+        traineeRepository.save(trainee);
+
+        return chosenTraining.convertToDto();
     }
 
     public TraineeDto saveTrainee(CreateTraineeDto traineeDto) {
@@ -46,19 +99,7 @@ public class TraineeService {
         if(!traineeRepository.existsById(traineeDto.getId()))
             throw new NoSuchElementException("Error: Trainee does not exist. id: " + traineeDto.getId());
 
-        Trainee currTrainee = new Trainee(traineeDto);
-
-        ArrayList<Training> tmp = new ArrayList<Training>();
-        Training training = null;
-        for (Long i: traineeDto.getTrainings()) {
-            training = trainingRepository.findById(i).orElse(null);
-
-            if(training == null)
-                throw new NoSuchElementException("Error: No such Training");
-
-            tmp.add(training);
-        }
-        currTrainee.setTrainings(tmp);
+        Trainee currTrainee = dtoToTrainee(traineeDto);
 
         return traineeRepository.save(currTrainee).convertToDto();
     }

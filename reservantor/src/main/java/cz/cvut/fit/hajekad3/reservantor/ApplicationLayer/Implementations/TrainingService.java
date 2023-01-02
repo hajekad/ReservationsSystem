@@ -7,7 +7,7 @@ import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepository;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.CreateTrainingDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.NoSuchElementException;
 @Service
 public class TrainingService {
     @Autowired
-    private ITrainingRepository trainingRepository;
+    private ITrainingRepositoryJpa trainingRepository;
     @Autowired
     private ICoachRepository coachRepository;
     @Autowired
@@ -27,7 +27,7 @@ public class TrainingService {
     @Autowired
     private ITraineeRepository traineeRepository;
 
-    public TrainingService(ITrainingRepository trainingRepository, ICoachRepository coachRepository, IPlaceRepository placeRepository, ITraineeRepository traineeRepository) {
+    public TrainingService(ITrainingRepositoryJpa trainingRepository, ICoachRepository coachRepository, IPlaceRepository placeRepository, ITraineeRepository traineeRepository) {
         this.trainingRepository = trainingRepository;
         this.coachRepository = coachRepository;
         this.placeRepository = placeRepository;

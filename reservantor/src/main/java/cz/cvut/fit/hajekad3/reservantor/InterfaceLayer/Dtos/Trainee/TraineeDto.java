@@ -11,7 +11,6 @@ public class TraineeDto {
     private String secondName;
     private int skillCap;
     private Collection<Long> trainings;
-
     public TraineeDto() {}
 
     public String getUsername() {

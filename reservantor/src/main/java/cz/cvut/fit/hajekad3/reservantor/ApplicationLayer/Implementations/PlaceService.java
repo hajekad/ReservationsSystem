@@ -3,7 +3,7 @@ package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Place;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +18,9 @@ public class PlaceService {
     private IPlaceRepository placeRepository;
 
     @Autowired
-    private ITrainingRepository trainingRepository;
+    private ITrainingRepositoryJpa trainingRepository;
 
-    public PlaceService(IPlaceRepository placeRepository, ITrainingRepository trainingRepository) {
+    public PlaceService(IPlaceRepository placeRepository, ITrainingRepositoryJpa trainingRepository) {
         this.placeRepository = placeRepository;
         this.trainingRepository = trainingRepository;
     }
