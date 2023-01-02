@@ -67,17 +67,6 @@ public class Trainee {
         return ret;
     }
 
-    public void fill()
-    {
-        setId(420L);
-        setEmail("tvojemama@mail.org");
-        setPassword("123abc");
-        setFirstName("Lucie");
-        setSecondName("Noci upije");
-        setUsername("Lucka");
-        setSkillCap(12);
-    }
-
     public Long getId() {
         return id;
     }

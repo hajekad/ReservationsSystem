@@ -14,9 +14,11 @@ public class Training {
     @Column(name = "id_training", nullable = false)
     private Long id;
 
+    @ManyToOne
     @Column(name = "id_coach", nullable = false)
     private Long idCoach;
 
+    @ManyToOne
     @Column(name = "id_place", nullable = false)
     private Long idPlace;
 
