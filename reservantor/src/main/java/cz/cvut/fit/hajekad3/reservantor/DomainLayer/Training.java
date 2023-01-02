@@ -1,8 +1,11 @@
 package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.CreateTrainingDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -15,12 +18,12 @@ public class Training {
     private Long id;
 
     @ManyToOne
-    @Column(name = "id_coach", nullable = false)
-    private Long idCoach;
+    @JoinColumn(name = "id_coach", nullable = false)
+    private Coach coach;
 
     @ManyToOne
-    @Column(name = "id_place", nullable = false)
-    private Long idPlace;
+    @JoinColumn(name = "id_place", nullable = false)
+    private Place place;
 
     @Column(name = "date_of_training", nullable = false)
     private Timestamp dateOfTraining;
@@ -33,16 +36,13 @@ public class Training {
     public Training(CreateTrainingDto trainingDto) {
         setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
         setDescription(trainingDto.getDescription());
-        setIdCoach(trainingDto.getIdCoach());
-        setIdPlace(trainingDto.getIdPlace());
+        Long idCoach = trainingDto.getIdCoach();
     }
 
     public Training(TrainingDto trainingDto) {
         setId(trainingDto.getId());
         setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
         setDescription(trainingDto.getDescription());
-        setIdCoach(trainingDto.getIdCoach());
-        setIdPlace(trainingDto.getIdPlace());
     }
 
     public TrainingDto convertToDto() {
@@ -51,8 +51,8 @@ public class Training {
         ret.setId(getId());
         ret.setDateOfTraining(getDateOfTraining().toString());
         ret.setDescription(getDescription());
-        ret.setIdCoach(getIdCoach());
-        ret.setIdPlace(getIdPlace());
+        ret.setIdCoach(getCoach().getId());
+        ret.setIdPlace(getPlace().getId());
 
         return ret;
     }
@@ -65,20 +65,20 @@ public class Training {
         this.id = id;
     }
 
-    public Long getIdCoach() {
-        return idCoach;
+    public Coach getCoach() {
+        return coach;
     }
 
-    public void setIdCoach(Long idCoach) {
-        this.idCoach = idCoach;
+    public void setCoach(Coach coach) {
+        this.coach = coach;
     }
 
-    public Long getIdPlace() {
-        return idPlace;
+    public Place getPlace() {
+        return place;
     }
 
-    public void setIdPlace(Long idPlace) {
-        this.idPlace = idPlace;
+    public void setPlace(Place place) {
+        this.place = place;
     }
 
     public Timestamp getDateOfTraining() {

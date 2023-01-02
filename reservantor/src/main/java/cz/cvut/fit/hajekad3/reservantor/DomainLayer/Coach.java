@@ -15,6 +15,8 @@ public class Coach {
     @Column(name = "cost_rate", nullable = false)
     private int costRate;
 
+
+
     @Column(name = "sport", nullable = false)
     private String sport;
 

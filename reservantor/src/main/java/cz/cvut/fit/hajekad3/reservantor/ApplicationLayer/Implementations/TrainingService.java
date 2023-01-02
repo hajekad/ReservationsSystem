@@ -1,6 +1,10 @@
 package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Coach;
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Place;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepository;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.CreateTrainingDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
@@ -14,12 +18,29 @@ public class TrainingService {
     @Autowired
     private ITrainingRepository trainingRepository;
 
-    public TrainingService(ITrainingRepository trainingRepository) {
+    @Autowired
+    private ICoachRepository coachRepository;
+
+    @Autowired
+    private IPlaceRepository placeRepository;
+
+    public TrainingService(ITrainingRepository trainingRepository, ICoachRepository coachRepository, IPlaceRepository placeRepository) {
         this.trainingRepository = trainingRepository;
+        this.coachRepository = coachRepository;
+        this.placeRepository = placeRepository;
     }
 
     public TrainingDto saveTraining(CreateTrainingDto trainingDto) {
         Training newTraining = new Training(trainingDto);
+
+        Coach coach = coachRepository.findById(trainingDto.getIdCoach()).orElse(null);
+        newTraining.setCoach(coach);
+
+        Place place = placeRepository.findById(trainingDto.getIdPlace()).orElse(null);
+        newTraining.setPlace(place);
+
+        if(place == null || coach == null)
+            throw new NoSuchElementException("Error: No such place or coach");
 
         Training ret = trainingRepository.save(newTraining);
 
@@ -40,6 +61,15 @@ public class TrainingService {
             throw new NoSuchElementException("Error: Training does not exist. id: " + trainingDto.getId());
 
         Training currTraining = new Training(trainingDto);
+
+        Coach coach = coachRepository.findById(trainingDto.getIdCoach()).orElse(null);
+        currTraining.setCoach(coach);
+
+        Place place = placeRepository.findById(trainingDto.getIdPlace()).orElse(null);
+        currTraining.setPlace(place);
+
+        if(place == null || coach == null)
+            throw new NoSuchElementException("Error: No such place or coach");
 
         return trainingRepository.save(currTraining).convertToDto();
     }

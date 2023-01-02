@@ -24,7 +24,14 @@ public class TrainingController {
 
     @PostMapping
     public ResponseEntity postTraining(@RequestBody CreateTrainingDto trainingDto) {
-        TrainingDto ret = trainingService.saveTraining(trainingDto);
+        TrainingDto ret;
+
+        try {
+            ret = trainingService.saveTraining(trainingDto);
+        }
+        catch(NoSuchElementException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
 
         return ResponseEntity.created(URI.create(ret.getId().toString())).body(ret);
     }
