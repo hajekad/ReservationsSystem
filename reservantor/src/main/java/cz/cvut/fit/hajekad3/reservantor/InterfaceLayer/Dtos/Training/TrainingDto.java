@@ -9,7 +9,7 @@ public class TrainingDto {
 
     private Long idPlace;
 
-    private Date dateOfTraining;
+    private String dateOfTraining;
 
     private String description;
 
@@ -39,11 +39,11 @@ public class TrainingDto {
         this.idPlace = idPlace;
     }
 
-    public Date getDateOfTraining() {
+    public String getDateOfTraining() {
         return dateOfTraining;
     }
 
-    public void setDateOfTraining(Date dateOfTraining) {
+    public void setDateOfTraining(String dateOfTraining) {
         this.dateOfTraining = dateOfTraining;
     }
 

@@ -4,6 +4,7 @@ import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.CreateTrain
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
 import jakarta.persistence.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -20,7 +21,7 @@ public class Training {
     private Long idPlace;
 
     @Column(name = "date_of_training", nullable = false)
-    private Date dateOfTraining;
+    private Timestamp dateOfTraining;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -28,7 +29,7 @@ public class Training {
     public Training() {}
 
     public Training(CreateTrainingDto trainingDto) {
-        setDateOfTraining(trainingDto.getDateOfTraining());
+        setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
         setDescription(trainingDto.getDescription());
         setIdCoach(trainingDto.getIdCoach());
         setIdPlace(trainingDto.getIdPlace());
@@ -38,7 +39,7 @@ public class Training {
         TrainingDto ret = new TrainingDto();
 
         ret.setId(getId());
-        ret.setDateOfTraining(getDateOfTraining());
+        ret.setDateOfTraining(getDateOfTraining().toString());
         ret.setDescription(getDescription());
         ret.setIdCoach(getIdCoach());
         ret.setIdPlace(getIdPlace());
@@ -70,11 +71,11 @@ public class Training {
         this.idPlace = idPlace;
     }
 
-    public Date getDateOfTraining() {
+    public Timestamp getDateOfTraining() {
         return dateOfTraining;
     }
 
-    public void setDateOfTraining(Date dateOfTraining) {
+    public void setDateOfTraining(Timestamp dateOfTraining) {
         this.dateOfTraining = dateOfTraining;
     }
 
