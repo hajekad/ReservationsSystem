@@ -35,6 +35,14 @@ public class Training {
         setIdPlace(trainingDto.getIdPlace());
     }
 
+    public Training(TrainingDto trainingDto) {
+        setId(trainingDto.getId());
+        setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
+        setDescription(trainingDto.getDescription());
+        setIdCoach(trainingDto.getIdCoach());
+        setIdPlace(trainingDto.getIdPlace());
+    }
+
     public TrainingDto convertToDto() {
         TrainingDto ret = new TrainingDto();
 

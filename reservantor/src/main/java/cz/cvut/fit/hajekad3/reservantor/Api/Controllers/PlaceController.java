@@ -3,11 +3,14 @@ package cz.cvut.fit.hajekad3.reservantor.Api.Controllers;
 import cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations.PlaceService;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto;
+import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -20,18 +23,14 @@ public class PlaceController {
     public PlaceController() {}
 
     @PostMapping
-    public PlaceDto postPlace(@RequestBody CreatePlaceDto placeDto) {
-        System.out.print("Api received a post request for user: ");
-        System.out.print(placeDto.getLatitude() + ' ' + placeDto.getLongitude());
+    public ResponseEntity postPlace(@RequestBody CreatePlaceDto placeDto) {
+        PlaceDto ret = placeService.savePlace(placeDto);
 
-        return placeService.savePlace(placeDto);
+        return ResponseEntity.created(URI.create(ret.getId().toString())).body(ret);
     }
 
     @GetMapping
     public ResponseEntity getPlace(@RequestParam Long id) {
-        System.out.print("Api received a get request for user_id: ");
-        System.out.println(id);
-
         PlaceDto ret;
 
         try{
@@ -42,5 +41,31 @@ public class PlaceController {
         }
 
         return ResponseEntity.ok(ret);
+    }
+
+    @PutMapping
+    public ResponseEntity updatePlace(@RequestBody PlaceDto placeDto) {
+        PlaceDto ret;
+
+        try {
+            ret = placeService.updatePlace(placeDto);
+        }
+        catch(NoSuchElementException e) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().body(ret);
+    }
+
+    @DeleteMapping
+    ResponseEntity deletePlace(@RequestParam Long id) {
+        try {
+            placeService.deletePlace(id);
+        }
+        catch(NoSuchElementException e) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 }

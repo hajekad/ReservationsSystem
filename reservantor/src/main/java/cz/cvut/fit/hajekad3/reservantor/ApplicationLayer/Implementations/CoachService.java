@@ -18,10 +18,7 @@ public class CoachService {
         this.coachRepository = coachRepository;
     }
 
-    public CoachDto saveCoach(CreateCoachDto coachDto){
-        System.out.print("Service received a post request for coach: ");
-        System.out.println(coachDto.getEmail());
-
+    public CoachDto saveCoach(CreateCoachDto coachDto) {
         Coach newCoach = new Coach(coachDto);
 
         Coach ret = coachRepository.save(newCoach);
@@ -30,14 +27,27 @@ public class CoachService {
     }
 
     public CoachDto getCoach(Long id) {
-        System.out.print("Service received a get request for coach_id: ");
-        System.out.println(id);
-
         Coach ret = coachRepository.findById(id).orElse(null);
 
         if(ret == null)
-            throw new NoSuchElementException("No such id.");
+            throw new NoSuchElementException("Error: Coach does not exist. id: " + id);
 
         return ret.convertToDto();
+    }
+
+    public CoachDto updateCoach(CoachDto coachDto) {
+        if(!coachRepository.existsById(coachDto.getId()))
+            throw new NoSuchElementException("Error: Coach does not exist. id: " + coachDto.getId());
+
+        Coach currCoach = new Coach(coachDto);
+
+        return coachRepository.save(currCoach).convertToDto();
+    }
+
+    public void deleteCoach(Long id) {
+        if(!coachRepository.existsById(id))
+            throw new NoSuchElementException("Error: Coach does not exist. id: " + id);
+
+        coachRepository.deleteById(id);
     }
 }

@@ -41,6 +41,16 @@ public class Coach {
         setSport(coachDto.getSport());
     }
 
+    public Coach(CoachDto coachDto) {
+        setId(coachDto.getId());
+        setCostRate(coachDto.getCostRate());
+        setEmail(coachDto.getEmail());
+        setPassword(coachDto.getPassword());
+        setFirstName(coachDto.getFirstName());
+        setSecondName(coachDto.getSecondName());
+        setSport(coachDto.getSport());
+    }
+
     public CoachDto convertToDto() {
         CoachDto ret = new CoachDto();
 

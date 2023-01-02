@@ -18,10 +18,7 @@ public class PlaceService {
         this.placeRepository = placeRepository;
     }
 
-    public PlaceDto savePlace(CreatePlaceDto placeDto){
-        System.out.print("Service received a post request for place: ");
-        System.out.println(placeDto.getLatitude() + ' ' + placeDto.getLongitude());
-
+    public PlaceDto savePlace(CreatePlaceDto placeDto) {
         Place newPlace = new Place(placeDto);
 
         Place ret = placeRepository.save(newPlace);
@@ -30,14 +27,27 @@ public class PlaceService {
     }
 
     public PlaceDto getPlace(Long id) {
-        System.out.print("Service received a get request for place_id: ");
-        System.out.println(id);
-
         Place ret = placeRepository.findById(id).orElse(null);
 
         if(ret == null)
-            throw new NoSuchElementException("No such id.");
+            throw new NoSuchElementException("Error: Place does not exist. id: " + id);
 
         return ret.convertToDto();
+    }
+
+    public PlaceDto updatePlace(PlaceDto placeDto) {
+        if(!placeRepository.existsById(placeDto.getId()))
+            throw new NoSuchElementException("Error: Place does not exist. id: " + placeDto.getId());
+
+        Place currPlace = new Place(placeDto);
+
+        return placeRepository.save(currPlace).convertToDto();
+    }
+
+    public void deletePlace(Long id) {
+        if(!placeRepository.existsById(id))
+            throw new NoSuchElementException("Error: Place does not exist. id: " + id);
+
+        placeRepository.deleteById(id);
     }
 }

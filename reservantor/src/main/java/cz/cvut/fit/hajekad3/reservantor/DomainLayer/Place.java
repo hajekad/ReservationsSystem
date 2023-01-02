@@ -24,6 +24,12 @@ public class Place {
         setLongitude(placeDto.getLongitude());
     }
 
+    public Place(PlaceDto placeDto) {
+        setId(placeDto.getId());
+        setLatitude(placeDto.getLatitude());
+        setLongitude(placeDto.getLongitude());
+    }
+
     public PlaceDto convertToDto() {
         PlaceDto ret = new PlaceDto();
 

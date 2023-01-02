@@ -18,10 +18,7 @@ public class TrainingService {
         this.trainingRepository = trainingRepository;
     }
 
-    public TrainingDto saveTraining(CreateTrainingDto trainingDto){
-        System.out.print("Service received a post request for training: ");
-        System.out.println(trainingDto.getDateOfTraining());
-
+    public TrainingDto saveTraining(CreateTrainingDto trainingDto) {
         Training newTraining = new Training(trainingDto);
 
         Training ret = trainingRepository.save(newTraining);
@@ -30,14 +27,27 @@ public class TrainingService {
     }
 
     public TrainingDto getTraining(Long id) {
-        System.out.print("Service received a get request for training_id: ");
-        System.out.println(id);
-
         Training ret = trainingRepository.findById(id).orElse(null);
 
         if(ret == null)
-            throw new NoSuchElementException("No such id.");
+            throw new NoSuchElementException("Error: Training does not exist. id: " + id);
 
         return ret.convertToDto();
+    }
+
+    public TrainingDto updateTraining(TrainingDto trainingDto) {
+        if(!trainingRepository.existsById(trainingDto.getId()))
+            throw new NoSuchElementException("Error: Training does not exist. id: " + trainingDto.getId());
+
+        Training currTraining = new Training(trainingDto);
+
+        return trainingRepository.save(currTraining).convertToDto();
+    }
+
+    public void deleteTraining(Long id) {
+        if(!trainingRepository.existsById(id))
+            throw new NoSuchElementException("Error: Training does not exist. id: " + id);
+
+        trainingRepository.deleteById(id);
     }
 }

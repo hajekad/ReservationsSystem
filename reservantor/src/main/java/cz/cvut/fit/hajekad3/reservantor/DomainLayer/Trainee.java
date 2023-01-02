@@ -41,6 +41,17 @@ public class Trainee {
         setSkillCap(50);
     }
 
+    public Trainee(TraineeDto traineeDto)
+    {
+        setId(traineeDto.getId());
+        setEmail(traineeDto.getEmail());
+        setPassword(traineeDto.getPassword());
+        setFirstName(traineeDto.getFirstName());
+        setSecondName(traineeDto.getSecondName());
+        setUsername(traineeDto.getUsername());
+        setSkillCap(traineeDto.getSkillCap());
+    }
+
     public TraineeDto convertToDto()
     {
         TraineeDto ret = new TraineeDto();
