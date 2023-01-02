@@ -1,7 +1,5 @@
 package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training;
 
-import java.util.Date;
-
 public class CreateTrainingDto {
     private Long idCoach;
 

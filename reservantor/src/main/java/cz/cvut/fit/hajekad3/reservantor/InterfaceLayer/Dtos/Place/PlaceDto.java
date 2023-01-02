@@ -1,10 +1,5 @@
 package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 import java.util.Collection;
 
 public class PlaceDto {

@@ -2,7 +2,6 @@ package cz.cvut.fit.hajekad3.reservantor.DomainLayer;
 
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CoachDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CreateCoachDto;
-import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.TraineeDto;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

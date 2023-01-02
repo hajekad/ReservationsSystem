@@ -67,6 +67,12 @@ public class Trainee {
     {
         TraineeDto ret = new TraineeDto();
 
+        ArrayList<Long> tmp = new ArrayList<Long>();
+        for (Training i: trainings) {
+            tmp.add(i.getId());
+        }
+        ret.setTrainings(tmp);
+
         ret.setId(getId());
         ret.setEmail(getEmail());
         ret.setPassword(getPassword());

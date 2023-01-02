@@ -1,8 +1,5 @@
 package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach;
 
-import jakarta.persistence.Column;
-
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class CoachDto {

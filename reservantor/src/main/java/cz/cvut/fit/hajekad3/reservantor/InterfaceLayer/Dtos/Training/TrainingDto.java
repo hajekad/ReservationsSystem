@@ -2,7 +2,6 @@ package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 public class TrainingDto {
     private Long id;

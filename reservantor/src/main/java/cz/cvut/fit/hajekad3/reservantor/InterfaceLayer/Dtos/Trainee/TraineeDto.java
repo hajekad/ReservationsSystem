@@ -1,7 +1,5 @@
 package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee;
 
-import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
-
 import java.util.Collection;
 
 public class TraineeDto {
