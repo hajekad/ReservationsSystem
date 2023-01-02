@@ -1,5 +1,7 @@
 package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 public class TrainingDto {
@@ -13,7 +15,11 @@ public class TrainingDto {
 
     private String description;
 
-    public TrainingDto() {}
+    private Collection<Long> participatingTraineesIds;
+
+    public TrainingDto() {
+        participatingTraineesIds = new ArrayList<Long>();
+    }
 
     public Long getId() {
         return id;
@@ -53,5 +59,13 @@ public class TrainingDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Collection<Long> getParticipatingTraineesIds() {
+        return participatingTraineesIds;
+    }
+
+    public void setParticipatingTraineesIds(Collection<Long> participatingTraineesIds) {
+        this.participatingTraineesIds = participatingTraineesIds;
     }
 }

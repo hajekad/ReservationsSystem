@@ -8,6 +8,8 @@ import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -31,15 +33,23 @@ public class Training {
     @Column(name = "description", nullable = false)
     private String description;
 
-    public Training() {}
+    @ManyToMany
+    @Column(name = "trainees", nullable = true)
+    private Collection<Trainee> participatingTrainees;
+
+    public Training() {
+        participatingTrainees = new ArrayList<Trainee>();
+    }
 
     public Training(CreateTrainingDto trainingDto) {
+        participatingTrainees = new ArrayList<Trainee>();
         setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
         setDescription(trainingDto.getDescription());
         Long idCoach = trainingDto.getIdCoach();
     }
 
     public Training(TrainingDto trainingDto) {
+        participatingTrainees = new ArrayList<Trainee>();
         setId(trainingDto.getId());
         setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
         setDescription(trainingDto.getDescription());
@@ -48,6 +58,12 @@ public class Training {
     public TrainingDto convertToDto() {
         TrainingDto ret = new TrainingDto();
 
+        ArrayList<Long> tmp = new ArrayList<Long>();
+        for (Trainee i: participatingTrainees) {
+            tmp.add(i.getId());
+        }
+
+        ret.setParticipatingTraineesIds(tmp);
         ret.setId(getId());
         ret.setDateOfTraining(getDateOfTraining().toString());
         ret.setDescription(getDescription());
@@ -95,5 +111,13 @@ public class Training {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Collection<Trainee> getParticipatingTrainees() {
+        return participatingTrainees;
+    }
+
+    public void setParticipatingTrainees(Collection<Trainee> participatingTrainees) {
+        this.participatingTrainees = participatingTrainees;
     }
 }

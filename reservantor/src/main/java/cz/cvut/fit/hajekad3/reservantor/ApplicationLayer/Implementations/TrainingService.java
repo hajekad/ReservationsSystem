@@ -2,32 +2,36 @@ package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Coach;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Place;
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Trainee;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepository;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.CreateTrainingDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 @Service
 public class TrainingService {
     @Autowired
     private ITrainingRepository trainingRepository;
-
     @Autowired
     private ICoachRepository coachRepository;
-
     @Autowired
     private IPlaceRepository placeRepository;
+    @Autowired
+    private ITraineeRepository traineeRepository;
 
-    public TrainingService(ITrainingRepository trainingRepository, ICoachRepository coachRepository, IPlaceRepository placeRepository) {
+    public TrainingService(ITrainingRepository trainingRepository, ICoachRepository coachRepository, IPlaceRepository placeRepository, ITraineeRepository traineeRepository) {
         this.trainingRepository = trainingRepository;
         this.coachRepository = coachRepository;
         this.placeRepository = placeRepository;
+        this.traineeRepository = traineeRepository;
     }
 
     public TrainingDto saveTraining(CreateTrainingDto trainingDto) {
@@ -70,6 +74,18 @@ public class TrainingService {
 
         if(place == null || coach == null)
             throw new NoSuchElementException("Error: No such place or coach");
+
+        ArrayList<Trainee> tmp = new ArrayList<Trainee>();
+        Trainee trainee = null;
+        for (Long i: trainingDto.getParticipatingTraineesIds()) {
+            trainee = traineeRepository.findById(i).orElse(null);
+
+            if(trainee == null)
+                throw new NoSuchElementException("Error: No such Trainee");
+
+            tmp.add(trainee);
+        }
+        currTraining.setParticipatingTrainees(tmp);
 
         return trainingRepository.save(currTraining).convertToDto();
     }
