@@ -5,8 +5,11 @@ import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Training.TrainingDto
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 @Entity(name = "Training")
 public class Training {
@@ -37,7 +40,23 @@ public class Training {
         participatingTrainees = new ArrayList<Trainee>();
     }
 
+    private boolean validateTimestamp(String timestampString) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            sdf.parse(timestampString);
+        }
+        catch (ParseException e) {
+            return false;
+        }
+
+        return true;
+    }
+
     public Training(CreateTrainingDto trainingDto) {
+        if(!validateTimestamp(trainingDto.getDateOfTraining()))
+            throw new NoSuchElementException();
+
         participatingTrainees = new ArrayList<Trainee>();
         setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
         setDescription(trainingDto.getDescription());
@@ -45,6 +64,9 @@ public class Training {
     }
 
     public Training(TrainingDto trainingDto) {
+        if(!validateTimestamp(trainingDto.getDateOfTraining()))
+            throw new NoSuchElementException();
+
         participatingTrainees = new ArrayList<Trainee>();
         setId(trainingDto.getId());
         setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));

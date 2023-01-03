@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -46,6 +48,19 @@ public class TraineeService {
         return ret;
     }
 
+    private boolean validateTimestamp(String timestampString) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            sdf.parse(timestampString);
+        }
+        catch (ParseException e) {
+            return false;
+        }
+
+        return true;
+    }
+
     public TraineeService(ITraineeRepository traineeRepository, ITrainingRepositoryJpa trainingRepositoryJpa, ITrainingRepositoryExtraMethods trainingRepositoryExtraMethods) {
         this.traineeRepository = traineeRepository;
         this.trainingRepositoryJpa = trainingRepositoryJpa;
@@ -53,6 +68,9 @@ public class TraineeService {
     }
 
     public TrainingDto assignTraining(String fromString, String toString, TraineeDto traineeDto) {
+        if(!validateTimestamp(fromString) || !validateTimestamp(toString))
+            throw new NoSuchElementException();
+
         Timestamp from = Timestamp.valueOf(fromString);
         Timestamp to = Timestamp.valueOf(toString);
         Trainee trainee = dtoToTrainee(traineeDto);
