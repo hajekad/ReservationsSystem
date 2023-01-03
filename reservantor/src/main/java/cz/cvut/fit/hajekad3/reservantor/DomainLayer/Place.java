@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Entity
+@Entity (name = "Place")
 public class Place {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

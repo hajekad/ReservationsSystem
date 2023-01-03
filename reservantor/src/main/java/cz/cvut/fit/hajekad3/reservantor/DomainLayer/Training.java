@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Entity
+@Entity(name = "Training")
 public class Training {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

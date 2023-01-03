@@ -17,10 +17,15 @@ public class TrainingRepositoryExtraMethods implements ITrainingRepositoryExtraM
 
     @Override
     public List<Training> trainingsInTimeframe(Timestamp from, Timestamp to) {
-        String queryString = "SELECT t FROM Training t WHERE t.date_of_training BETWEEN :from AND :to";
+        System.out.println(from.toString() + " " + to.toString() );
+
+        String queryString = "SELECT DISTINCT t FROM Training t WHERE t.dateOfTraining >= :from AND t.dateOfTraining <= :to";
         TypedQuery<Training> query = entityManager.createQuery(queryString, Training.class);
         query.setParameter("from", from);
         query.setParameter("to", to);
+
+        System.out.println(query.toString());
+
         return query.getResultList();
     }
 }
