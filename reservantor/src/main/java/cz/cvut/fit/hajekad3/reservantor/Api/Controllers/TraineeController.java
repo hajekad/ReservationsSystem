@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/trainee")
 @ComponentScan(basePackages = "cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations")
+@CrossOrigin(origins = "*")
 public class TraineeController {
     @Autowired
     private TraineeService traineeService;

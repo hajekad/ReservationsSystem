@@ -14,6 +14,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/place")
 @ComponentScan(basePackages = "cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations")
+@CrossOrigin(origins = "*")
 public class PlaceController {
     @Autowired
     private PlaceService placeService;
