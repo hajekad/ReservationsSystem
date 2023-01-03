@@ -17,9 +17,6 @@ public class Coach {
     @Column(name = "cost_rate", nullable = false)
     private int costRate;
 
-    @Column(name = "sport", nullable = false)
-    private String sport;
-
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -47,7 +44,6 @@ public class Coach {
         setPassword(coachDto.getPassword());
         setFirstName(coachDto.getFirstName());
         setSecondName(coachDto.getSecondName());
-        setSport(coachDto.getSport());
     }
 
     public Coach(CoachDto coachDto) {
@@ -58,7 +54,6 @@ public class Coach {
         setPassword(coachDto.getPassword());
         setFirstName(coachDto.getFirstName());
         setSecondName(coachDto.getSecondName());
-        setSport(coachDto.getSport());
     }
 
     public CoachDto convertToDto() {
@@ -77,7 +72,6 @@ public class Coach {
         ret.setPassword(getPassword());
         ret.setFirstName(getFirstName());
         ret.setSecondName(getSecondName());
-        ret.setSport(getSport());
 
         return ret;
     }
@@ -96,14 +90,6 @@ public class Coach {
 
     public void setCostRate(int costRate) {
         this.costRate = costRate;
-    }
-
-    public String getSport() {
-        return sport;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
     }
 
     public String getPassword() {

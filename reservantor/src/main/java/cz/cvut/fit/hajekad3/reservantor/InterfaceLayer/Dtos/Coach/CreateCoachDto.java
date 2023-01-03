@@ -2,7 +2,6 @@ package cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach;
 
 public class CreateCoachDto {
     private int costRate;
-    private String sport;
     private String password;
     private String email;
     private String firstName;
@@ -16,14 +15,6 @@ public class CreateCoachDto {
 
     public void setCostRate(int costRate) {
         this.costRate = costRate;
-    }
-
-    public String getSport() {
-        return sport;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
     }
 
     public String getPassword() {

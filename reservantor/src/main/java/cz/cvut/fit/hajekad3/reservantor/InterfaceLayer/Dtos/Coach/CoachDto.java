@@ -5,7 +5,6 @@ import java.util.Collection;
 public class CoachDto {
     private Long id;
     private int costRate;
-    private String sport;
     private String password;
     private String email;
     private String firstName;
@@ -28,14 +27,6 @@ public class CoachDto {
 
     public void setCostRate(int costRate) {
         this.costRate = costRate;
-    }
-
-    public String getSport() {
-        return sport;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
     }
 
     public String getPassword() {
