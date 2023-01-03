@@ -2,7 +2,8 @@ package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Trainee;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepositoryExtraMethods;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryExtraMethods;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Trainee.CreateTraineeDto;
@@ -22,7 +23,10 @@ import java.util.NoSuchElementException;
 @Service
 public class TraineeService {
     @Autowired
-    private ITraineeRepository traineeRepository;
+    private ITraineeRepositoryJpa traineeRepositoryJpa;
+
+    @Autowired
+    private ITraineeRepositoryExtraMethods traineeRepositoryExtraMethods;
 
     @Autowired
     private ITrainingRepositoryJpa trainingRepositoryJpa;
@@ -61,8 +65,9 @@ public class TraineeService {
         return true;
     }
 
-    public TraineeService(ITraineeRepository traineeRepository, ITrainingRepositoryJpa trainingRepositoryJpa, ITrainingRepositoryExtraMethods trainingRepositoryExtraMethods) {
-        this.traineeRepository = traineeRepository;
+    public TraineeService(ITraineeRepositoryJpa traineeRepositoryJpa, ITraineeRepositoryExtraMethods traineeRepositoryExtraMethods, ITrainingRepositoryJpa trainingRepositoryJpa, ITrainingRepositoryExtraMethods trainingRepositoryExtraMethods) {
+        this.traineeRepositoryJpa = traineeRepositoryJpa;
+        this.traineeRepositoryExtraMethods = traineeRepositoryExtraMethods;
         this.trainingRepositoryJpa = trainingRepositoryJpa;
         this.trainingRepositoryExtraMethods = trainingRepositoryExtraMethods;
     }
@@ -91,7 +96,7 @@ public class TraineeService {
         trainee.setTrainings(newTrainingList);
 
         trainingRepositoryJpa.save(chosenTraining);
-        traineeRepository.save(trainee);
+        traineeRepositoryJpa.save(trainee);
 
         return chosenTraining.convertToDto();
     }
@@ -99,13 +104,13 @@ public class TraineeService {
     public TraineeDto saveTrainee(CreateTraineeDto traineeDto) {
         Trainee newTrainee = new Trainee(traineeDto);
 
-        Trainee ret = traineeRepository.save(newTrainee);
+        Trainee ret = traineeRepositoryJpa.save(newTrainee);
 
         return ret.convertToDto();
     }
 
     public TraineeDto getTrainee(Long id) {
-        Trainee ret = traineeRepository.findById(id).orElse(null);
+        Trainee ret = traineeRepositoryJpa.findById(id).orElse(null);
 
         if(ret == null)
             throw new NoSuchElementException("Error: Trainee does not exist. id: " + id);
@@ -114,18 +119,29 @@ public class TraineeService {
     }
 
     public TraineeDto updateTrainee(TraineeDto traineeDto) {
-        if(!traineeRepository.existsById(traineeDto.getId()))
+        if(!traineeRepositoryJpa.existsById(traineeDto.getId()))
             throw new NoSuchElementException("Error: Trainee does not exist. id: " + traineeDto.getId());
 
         Trainee currTrainee = dtoToTrainee(traineeDto);
 
-        return traineeRepository.save(currTrainee).convertToDto();
+        return traineeRepositoryJpa.save(currTrainee).convertToDto();
     }
 
     public void deleteTrainee(Long id) {
-        if(!traineeRepository.existsById(id))
+        if(!traineeRepositoryJpa.existsById(id))
             throw new NoSuchElementException("Error: Trainee does not exist. id: " + id);
 
-        traineeRepository.deleteById(id);
+        traineeRepositoryJpa.deleteById(id);
+    }
+
+    public TraineeDto findMatch(int range, TraineeDto challengerDto) {
+        Trainee challenger = dtoToTrainee(challengerDto);
+
+        List<Trainee> opponents = traineeRepositoryExtraMethods.findMatch(range, challenger);
+
+        if(opponents.isEmpty())
+            throw new NoSuchElementException("Error: No other users share the skill range.");
+
+        return opponents.stream().findFirst().get().convertToDto();
     }
 }

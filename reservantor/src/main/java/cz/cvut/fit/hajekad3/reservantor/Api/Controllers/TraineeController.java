@@ -37,6 +37,21 @@ public class TraineeController {
         return ResponseEntity.ok().body(ret);
     }
 
+    @GetMapping("/bussiness")
+    public ResponseEntity findMatch(@RequestParam int range, @RequestParam TraineeDto challenger) {
+        TraineeDto ret;
+
+        try {
+            ret = traineeService.findMatch(range, challenger);
+        }
+        catch(NoSuchElementException e)
+        {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
+        return ResponseEntity.ok().body(ret);
+    }
+
     @PostMapping
     public ResponseEntity postTrainee(@RequestBody CreateTraineeDto traineeDto) {
         TraineeDto ret = traineeService.saveTrainee(traineeDto);

@@ -5,7 +5,7 @@ import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Trainee;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepositoryExtraMethods;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepositoryJpa;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CreateCoachDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CoachDto;
@@ -23,12 +23,12 @@ public class CoachService {
     @Autowired
     private ITrainingRepositoryJpa trainingRepositoryJpa;
     @Autowired
-    private ITraineeRepository traineeRepository;
+    private ITraineeRepositoryJpa traineeRepository;
 
     @Autowired
     private ICoachRepositoryExtraMethods coachRepositoryExtraMethods;
 
-    public CoachService(ICoachRepositoryJpa coachRepositoryJpa, ITrainingRepositoryJpa trainingRepositoryJpa, ITraineeRepository traineeRepository, ICoachRepositoryExtraMethods coachRepositoryExtraMethods) {
+    public CoachService(ICoachRepositoryJpa coachRepositoryJpa, ITrainingRepositoryJpa trainingRepositoryJpa, ITraineeRepositoryJpa traineeRepository, ICoachRepositoryExtraMethods coachRepositoryExtraMethods) {
         this.coachRepositoryJpa = coachRepositoryJpa;
         this.trainingRepositoryJpa = trainingRepositoryJpa;
         this.traineeRepository = traineeRepository;
