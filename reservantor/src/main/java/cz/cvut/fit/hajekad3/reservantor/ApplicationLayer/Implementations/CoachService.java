@@ -1,8 +1,11 @@
 package cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations;
 
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Coach;
+import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Trainee;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepositoryExtraMethods;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepositoryJpa;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CreateCoachDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CoachDto;
@@ -15,26 +18,33 @@ import java.util.NoSuchElementException;
 @Service
 public class CoachService {
     @Autowired
-    private ICoachRepository coachRepository;
+    private ICoachRepositoryJpa coachRepositoryJpa;
 
     @Autowired
-    private ITrainingRepositoryJpa trainingRepository;
+    private ITrainingRepositoryJpa trainingRepositoryJpa;
+    @Autowired
+    private ITraineeRepository traineeRepository;
 
-    public CoachService(ICoachRepository coachRepository, ITrainingRepositoryJpa trainingRepository) {
-        this.coachRepository = coachRepository;
-        this.trainingRepository = trainingRepository;
+    @Autowired
+    private ICoachRepositoryExtraMethods coachRepositoryExtraMethods;
+
+    public CoachService(ICoachRepositoryJpa coachRepositoryJpa, ITrainingRepositoryJpa trainingRepositoryJpa, ITraineeRepository traineeRepository, ICoachRepositoryExtraMethods coachRepositoryExtraMethods) {
+        this.coachRepositoryJpa = coachRepositoryJpa;
+        this.trainingRepositoryJpa = trainingRepositoryJpa;
+        this.traineeRepository = traineeRepository;
+        this.coachRepositoryExtraMethods = coachRepositoryExtraMethods;
     }
 
     public CoachDto saveCoach(CreateCoachDto coachDto) {
         Coach newCoach = new Coach(coachDto);
 
-        Coach ret = coachRepository.save(newCoach);
+        Coach ret = coachRepositoryJpa.save(newCoach);
 
         return ret.convertToDto();
     }
 
     public CoachDto getCoach(Long id) {
-        Coach ret = coachRepository.findById(id).orElse(null);
+        Coach ret = coachRepositoryJpa.findById(id).orElse(null);
 
         if(ret == null)
             throw new NoSuchElementException("Error: Coach does not exist. id: " + id);
@@ -43,7 +53,7 @@ public class CoachService {
     }
 
     public CoachDto updateCoach(CoachDto coachDto) {
-        if(!coachRepository.existsById(coachDto.getId()))
+        if(!coachRepositoryJpa.existsById(coachDto.getId()))
             throw new NoSuchElementException("Error: Coach does not exist. id: " + coachDto.getId());
 
         Coach currCoach = new Coach(coachDto);
@@ -51,7 +61,7 @@ public class CoachService {
         ArrayList<Training> tmp = new ArrayList<Training>();
         Training training = null;
         for (Long i: coachDto.getTrainings()) {
-            training = trainingRepository.findById(i).orElse(null);
+            training = trainingRepositoryJpa.findById(i).orElse(null);
 
             if(training == null)
                 throw new NoSuchElementException("Error: No such Trainee");
@@ -60,17 +70,32 @@ public class CoachService {
         }
         currCoach.setTrainings(tmp);
 
-        return coachRepository.save(currCoach).convertToDto();
+        return coachRepositoryJpa.save(currCoach).convertToDto();
     }
 
     public void deleteCoach(Long id) {
-        if(!coachRepository.existsById(id))
+        if(!coachRepositoryJpa.existsById(id))
             throw new NoSuchElementException("Error: Coach does not exist. id: " + id);
 
-        coachRepository.deleteById(id);
+        coachRepositoryJpa.deleteById(id);
     }
 
     public void updateTraineesSkillCap(Long idCoach, Long idTrainee, int skillCap) {
+        Coach coach = coachRepositoryJpa.findById(idCoach).orElse(null);
 
+        if(coach == null)
+            throw new NoSuchElementException("Error: Coach does not exist. id: " + idCoach);
+
+        Trainee trainee = traineeRepository.findById(idTrainee).orElse(null);
+
+        if(trainee == null)
+            throw new NoSuchElementException("Error: trainee does not exist. id: " + idTrainee);
+
+        if(!coachRepositoryExtraMethods.coachTrainedTrainee(trainee, coach))
+            throw new NoSuchElementException("Error: coach did not train trainee");
+
+        trainee.setSkillCap(skillCap);
+
+        traineeRepository.save(trainee);
     }
 }

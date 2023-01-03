@@ -4,7 +4,7 @@ import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Coach;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Place;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Trainee;
 import cz.cvut.fit.hajekad3.reservantor.DomainLayer.Training;
-import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepository;
+import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ICoachRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.IPlaceRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITraineeRepository;
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
@@ -21,13 +21,13 @@ public class TrainingService {
     @Autowired
     private ITrainingRepositoryJpa trainingRepository;
     @Autowired
-    private ICoachRepository coachRepository;
+    private ICoachRepositoryJpa coachRepository;
     @Autowired
     private IPlaceRepository placeRepository;
     @Autowired
     private ITraineeRepository traineeRepository;
 
-    public TrainingService(ITrainingRepositoryJpa trainingRepository, ICoachRepository coachRepository, IPlaceRepository placeRepository, ITraineeRepository traineeRepository) {
+    public TrainingService(ITrainingRepositoryJpa trainingRepository, ICoachRepositoryJpa coachRepository, IPlaceRepository placeRepository, ITraineeRepository traineeRepository) {
         this.trainingRepository = trainingRepository;
         this.coachRepository = coachRepository;
         this.placeRepository = placeRepository;
