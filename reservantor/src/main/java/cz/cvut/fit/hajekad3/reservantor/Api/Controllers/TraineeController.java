@@ -24,7 +24,7 @@ public class TraineeController {
     public TraineeController() {}
 
     @PutMapping("/bussiness")
-    public ResponseEntity getTrainingsInTimeFrame(@RequestParam String from, @RequestParam String to, @RequestBody TraineeDto traineeDto) {
+    public ResponseEntity getTrainingInTimeFrame(@RequestParam String from, @RequestParam String to, @RequestBody TraineeDto traineeDto) {
         TrainingDto ret = null;
 
         try {
@@ -38,7 +38,7 @@ public class TraineeController {
     }
 
     @GetMapping("/bussiness")
-    public ResponseEntity findMatch(@RequestParam int range, @RequestParam TraineeDto challenger) {
+    public ResponseEntity findMatch(@RequestParam int range, @RequestBody TraineeDto challenger) {
         TraineeDto ret;
 
         try {

@@ -16,9 +16,10 @@ public class TraineeRepositoryExtraMethods implements ITraineeRepositoryExtraMet
 
     @Override
     public List<Trainee> findMatch(int range, Trainee trainee) {
-        String queryString = "SELECT DISTINCT t FROM Trainee t WHERE t.skillCap >= :trainee.skillcap - :range AND t.skillCap <= :trainee.skillcap + :range";
+        String queryString = "SELECT DISTINCT t FROM Trainee t WHERE t.skillCap >= :traineeSkill - :range AND t.skillCap <= :traineeSkill + :range AND t.id != :traineeId";
         TypedQuery<Trainee> query = entityManager.createQuery(queryString, Trainee.class);
-        query.setParameter("trainee", trainee);
+        query.setParameter("traineeId", trainee.getId());
+        query.setParameter("traineeSkill", trainee.getSkillCap());
         query.setParameter("range", range);
 
         return query.getResultList();

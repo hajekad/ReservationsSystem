@@ -16,11 +16,11 @@ public class CoachRepositoryExtraMethods implements ICoachRepositoryExtraMethods
 
     @Override
     public boolean coachTrainedTrainee(Trainee trainee, Coach coach) {
-        String jpql = "SELECT t FROM Training t WHERE :coach MEMBER OF t.coach AND :trainee MEMBER OF t.participatingTrainees";
+        String jpql = "SELECT t FROM Training t WHERE :coach = t.coach.id AND :trainee MEMBER OF t.participatingTrainees";
 
         TypedQuery<Training> query = entityManager.createQuery(jpql, Training.class);
 
-        query.setParameter("coach", coach);
+        query.setParameter("coach", coach.getId());
         query.setParameter("trainee", trainee);
 
         return !query.getResultList().isEmpty();

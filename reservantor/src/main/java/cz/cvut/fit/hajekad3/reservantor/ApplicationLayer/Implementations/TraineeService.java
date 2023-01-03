@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @Service
 public class TraineeService {
@@ -83,6 +80,13 @@ public class TraineeService {
 
         if(availableTrainings.isEmpty())
             throw new NoSuchElementException();
+
+        Collections.sort(availableTrainings, new Comparator<Training>() {
+            @Override
+            public int compare(Training o1, Training o2) {
+                return o1.getParticipatingTrainees().size() - o2.getParticipatingTrainees().size();
+            }
+        });
 
         Training chosenTraining = availableTrainings.get(0);
 

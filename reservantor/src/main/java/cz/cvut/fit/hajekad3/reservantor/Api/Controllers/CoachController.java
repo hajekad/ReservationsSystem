@@ -26,6 +26,7 @@ public class CoachController {
             coachService.updateTraineesSkillCap(idCoach, idTrainee, skillCap);
         }
         catch(NoSuchElementException e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.noContent().build();
         }
 
