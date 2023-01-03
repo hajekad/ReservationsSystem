@@ -69,4 +69,8 @@ public class CoachService {
 
         coachRepository.deleteById(id);
     }
+
+    public void updateTraineesSkillCap(Long idCoach, Long idTrainee, int skillCap) {
+
+    }
 }

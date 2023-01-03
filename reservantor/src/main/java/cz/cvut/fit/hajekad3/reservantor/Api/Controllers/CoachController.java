@@ -20,11 +20,28 @@ public class CoachController {
 
     public CoachController() {}
 
+    @PutMapping("/bussiness")
+    public ResponseEntity updateTraineesSkillCap(@RequestParam Long idCoach, @RequestParam Long idTrainee, @RequestParam int skillCap) {
+        try {
+            coachService.updateTraineesSkillCap(idCoach, idTrainee, skillCap);
+        }
+        catch(NoSuchElementException e) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping
     public ResponseEntity postCoach(@RequestBody CreateCoachDto coachDto) {
         CoachDto ret = coachService.saveCoach(coachDto);
 
-        return ResponseEntity.created(URI.create(ret.getId().toString())).body(ret);
+        if(ret.getId() == null)
+            return ResponseEntity.badRequest().build();
+
+        String reti = ret.getId().describeConstable().orElse(0L).toString();
+
+        return ResponseEntity.created(URI.create(reti)).body(ret);
     }
 
     @GetMapping
@@ -56,7 +73,7 @@ public class CoachController {
     }
 
     @DeleteMapping
-    ResponseEntity deleteCoach(@RequestParam Long id) {
+    public ResponseEntity deleteCoach(@RequestParam Long id) {
         try {
             coachService.deleteCoach(id);
         }
