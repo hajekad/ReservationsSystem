@@ -39,7 +39,6 @@ public class CoachAcceptanceTests {
     public CoachDto testPostCoach() {
         CreateCoachDto createCoachDto = new CreateCoachDto();
         createCoachDto.setCostRate(100);
-        createCoachDto.setSport("Basketball");
         createCoachDto.setPassword("password");
         createCoachDto.setEmail("coach@gmail.com");
         createCoachDto.setFirstName("John");
@@ -47,7 +46,6 @@ public class CoachAcceptanceTests {
 
         CoachDto coachDto = new CoachDto();
         coachDto.setCostRate(100);
-        coachDto.setSport("Basketball");
         coachDto.setPassword("password");
         coachDto.setEmail("coach@gmail.com");
         coachDto.setFirstName("John");
@@ -80,7 +78,6 @@ public class CoachAcceptanceTests {
     public void testDeleteCoach() {
         CreateCoachDto createCoachDto = new CreateCoachDto();
         createCoachDto.setCostRate(100);
-        createCoachDto.setSport("Basketball");
         createCoachDto.setPassword("password");
         createCoachDto.setEmail("coach@gmail.com");
         createCoachDto.setFirstName("John");
@@ -88,7 +85,6 @@ public class CoachAcceptanceTests {
 
         CoachDto coachDto = new CoachDto();
         coachDto.setCostRate(100);
-        coachDto.setSport("Basketball");
         coachDto.setPassword("password");
         coachDto.setEmail("coach@gmail.com");
         coachDto.setFirstName("John");
@@ -129,7 +125,6 @@ public class CoachAcceptanceTests {
     public void testGetCoach() {
         CreateCoachDto createCoachDto = new CreateCoachDto();
         createCoachDto.setCostRate(100);
-        createCoachDto.setSport("Basketball");
         createCoachDto.setPassword("password");
         createCoachDto.setEmail("coach@gmail.com");
         createCoachDto.setFirstName("John");
@@ -137,7 +132,6 @@ public class CoachAcceptanceTests {
 
         CoachDto coachDto = new CoachDto();
         coachDto.setCostRate(100);
-        coachDto.setSport("Basketball");
         coachDto.setPassword("password");
         coachDto.setEmail("coach@gmail.com");
         coachDto.setFirstName("John");
@@ -161,7 +155,6 @@ public class CoachAcceptanceTests {
         CoachDto coachDtoTwo = new CoachDto();
         coachDtoTwo.setId(id);
         coachDtoTwo.setCostRate(100);
-        coachDtoTwo.setSport("Basketball");
         coachDtoTwo.setPassword("password");
         coachDtoTwo.setEmail("coach@gmail.com");
         coachDtoTwo.setFirstName("John");

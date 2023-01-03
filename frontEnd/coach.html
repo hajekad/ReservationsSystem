@@ -5,6 +5,7 @@
 </head>
 <body>
   <header>
+    <h1> Coach </h1>
     <nav>
       <ul>
         <li><a href="trainee.html">Trainee</a></li>
@@ -14,33 +15,76 @@
     </nav>
   </header>
   <main>
+
     <section id="getRequest">
       <h2>Get</h2>
-      <label for="id-input">ID:</label>
-      <input type="text" id="id-input" />
+      <label for="id-input-get">ID:</label>
+      <input type="text" id="id-input-get" />
+      <br />
       <button onclick="coachGetRequest()">Get Coach</button>
+      <br />
       <textarea id="responseGet"></textarea>
     </section>
+
     <section id="postCoach">
         <h2>Post</h2>
-        <label for="cost-rate-input">Cost rate:</label>
-        <input type="text" id="cost-rate-input" />
+        <label for="cost-rate-input-post">Cost rate:</label>
+        <input type="text" id="cost-rate-input-post" />
         <br />
-        <label for="password-input">Password:</label>
-        <input type="password" id="password-input" />
+        <label for="password-input-post">Password:</label>
+        <input type="password" id="password-input-post" />
         <br />
-        <label for="email-input">Email:</label>
-        <input type="email" id="email-input" />
+        <label for="email-input-post">Email:</label>
+        <input type="email" id="email-input-post" />
         <br />
-        <label for="first-name-input">First name:</label>
-        <input type="text" id="first-name-input" />
+        <label for="first-name-input-post">First name:</label>
+        <input type="text" id="first-name-input-post" />
         <br />
-        <label for="second-name-input">Second name:</label>
-        <input type="text" id="second-name-input" />
+        <label for="second-name-input-post">Second name:</label>
+        <input type="text" id="second-name-input-post" />
         <br />
         <button onclick="createCoach()">Create Coach</button>
         <br />
         <textarea id="responsePost"></textarea>
+    </section>
+
+    <section id="deleteRequest">
+      <h2>Delete</h2>
+      <label for="id-input-delete">ID:</label>
+      <input type="text" id="id-input-delete" />
+      <button onclick="coachDeleteRequest()">Delete Coach</button>
+      <textarea id="responseDelete"></textarea>
+    </section>
+
+    <section id="updateCoach">
+      <h2>Update</h2>
+      <label for="id-update">Id:</label>
+      <input type="text" id="id-update" />
+      <br />
+      <label for="cost-rate-input-update">Cost rate:</label>
+      <input type="number" id="cost-rate-input-update" min="0" max="10000" />
+      <br />
+      <label for="password-input-update">Password:</label>
+      <input type="password" id="password-input-update" />
+      <br />
+      <label for="email-input-update">Email:</label>
+      <input type="email" id="email-input-update" />
+      <br />
+      <label for="first-name-input-update">First name:</label>
+      <input type="text" id="first-name-input-update" />
+      <br />
+      <label for="second-name-input-update">Second name:</label>
+      <input type="text" id="second-name-input-update" />
+      <br />
+      
+      <label for="trainings-update">Trainings JSON:</label>
+      <div id="input-container"></div>
+      <button onclick="addInput()">Add Input</button>
+      <br />
+      
+      <button onclick="updateCoach()">Update Coach</button>
+      <br />
+      <textarea id="responseUpdate"></textarea>
     </section>
   </main>
   <footer>
