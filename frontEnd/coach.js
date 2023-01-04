@@ -1,14 +1,14 @@
 async function coachGet() {
-  const id = document.getElementById('id-input-get').value;
+  const id = document.getElementById('id-get').value;
   get(id, '/coach');
 }
 
 async function createCoach() {
-  const costRate = document.getElementById('cost-rate-input-post').value;
-  const password = document.getElementById('password-input-post').value;
-  const email = document.getElementById('email-input-post').value;
-  const firstName = document.getElementById('first-name-input-post').value;
-  const secondName = document.getElementById('second-name-input-post').value;
+  const costRate = document.getElementById('cost-rate-post').value;
+  const password = document.getElementById('password-post').value;
+  const email = document.getElementById('email-post').value;
+  const firstName = document.getElementById('first-name-post').value;
+  const secondName = document.getElementById('second-name-post').value;
 
   const createCoachDto = {
     costRate: costRate,
@@ -22,17 +22,17 @@ async function createCoach() {
 }
 
 async function coachDelete() {
-  const id = document.getElementById('id-input-delete').value;
+  const id = document.getElementById('id-delete').value;
   remove(id, '/coach');
 }
 
 async function updateCoach() {
   const id = document.getElementById('id-update').value;
-  const costRate = document.getElementById('cost-rate-input-update').value;
-  const password = document.getElementById('password-input-update').value;
-  const email = document.getElementById('email-input-update').value;
-  const firstName = document.getElementById('first-name-input-update').value;
-  const secondName = document.getElementById('second-name-input-update').value;
+  const costRate = document.getElementById('cost-rate-update').value;
+  const password = document.getElementById('password-update').value;
+  const email = document.getElementById('email-update').value;
+  const firstName = document.getElementById('first-name-update').value;
+  const secondName = document.getElementById('second-name-update').value;
   const inputs = document.querySelectorAll('.trainingInput');
   const trainings = Array.from(inputs).map(input => Number(input.value));
   

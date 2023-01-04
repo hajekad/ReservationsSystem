@@ -18,8 +18,8 @@
 
     <section id="getRequest">
       <h2>Get</h2>
-      <label for="id-input-get">ID:</label>
-      <input type="text" id="id-input-get" />
+      <label for="id-get">ID:</label>
+      <input type="text" id="id-get" />
       <br />
       <button onclick="traineeGet()">Get Trainee</button>
       <br />
@@ -29,18 +29,18 @@
     <section id="postTrainee">        
       <h2>Create Trainee</h2>
       <form>
-      <label for="username-input-post">Username:</label><br>
-      <input type="text" id="username-input-post" name="username"><br>
-      <label for="password-input-post">Password:</label><br>
-      <input type="text" id="password-input-post" name="password"><br>
-      <label for="email-input-post">Email:</label><br>
-      <input type="text" id="email-input-post" name="email"><br>
-      <label for="first-name-input-post">First Name:</label><br>
-      <input type="text" id="first-name-input-post" name="firstName"><br>
-      <label for="second-name-input-post">Second Name:</label><br>
-      <input type="text" id="second-name-input-post" name="secondName"><br>
-      <label for="skill-cap-input-post">Skill Cap:</label><br>
-      <input type="text" id="skill-cap-input-post" name="skillCap"><br>
+      <label for="username-post">Username:</label><br>
+      <input type="text" id="username-post"><br>
+      <label for="password-post">Password:</label><br>
+      <input type="text" id="password-post"><br>
+      <label for="email-post">Email:</label><br>
+      <input type="text" id="email-post"><br>
+      <label for="first-name-post">First Name:</label><br>
+      <input type="text" id="first-name-post"><br>
+      <label for="second-name-post">Second Name:</label><br>
+      <input type="text" id="second-name-post"><br>
+      <label for="skill-cap-post">Skill Cap:</label><br>
+      <input type="text" id="skill-cap-post"><br>
       <button type="button" onclick="createTrainee()">Create Trainee</button>
       </form> 
       <textarea id="responsePost" rows="10" cols="50"></textarea>
@@ -48,29 +48,29 @@
 
     <section id="deleteRequest">
       <h2>Delete</h2>
-      <label for="id-input-delete">ID:</label>
-      <input type="text" id="id-input-delete" />
+      <label for="id-delete">ID:</label>
+      <input type="text" id="id-delete" />
       <button onclick="traineeDelete()">Delete Trainee</button>
       <textarea id="responseDelete"></textarea>
     </section>
 
     <section id="updateTrainee">
-      <h2>Create Trainee</h2>
+      <h2>Update Trainee</h2>
       <form>
         <label for="id-update">Trainee ID:</label><br>
-        <input type="text" id="id-update" name="id"><br>
-        <label for="username-input-update">Username:</label><br>
-        <input type="text" id="username-input-update" name="username"><br>
-        <label for="password-input-update">Password:</label><br>
-        <input type="text" id="password-input-update" name="password"><br>
-        <label for="email-input-update">Email:</label><br>
-        <input type="text" id="email-input-update" name="email"><br>
-        <label for="first-name-input-update">First Name:</label><br>
-        <input type="text" id="first-name-input-update" name="firstName"><br>
-        <label for="second-name-input-update">Second Name:</label><br>
-        <input type="text" id="second-name-input-update" name="secondName"><br>
-        <label for="skill-cap-input-update">Skill Cap:</label><br>
-        <input type="text" id="skill-cap-input-update" name="skillCap"><br>
+        <input type="text" id="id-update"><br>
+        <label for="username-update">Username:</label><br>
+        <input type="text" id="username-update"><br>
+        <label for="password-update">Password:</label><br>
+        <input type="text" id="password-update"><br>
+        <label for="email-update">Email:</label><br>
+        <input type="text" id="email-update"><br>
+        <label for="first-name-update">First Name:</label><br>
+        <input type="text" id="first-name-update"><br>
+        <label for="second-name-update">Second Name:</label><br>
+        <input type="text" id="second-name-update"><br>
+        <label for="skill-cap-update">Skill Cap:</label><br>
+        <input type="text" id="skill-cap-update"><br>
         <button type="button" onclick="updateTrainee()">Update Trainee</button>
       </form> 
       <textarea id="responsePut" rows="10" cols="50"></textarea>

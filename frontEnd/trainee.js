@@ -1,5 +1,5 @@
 async function traineeGet() {
-  const id = document.getElementById('id-input-get').value;
+  const id = document.getElementById('id-get').value;
   get(id, '/trainee');
 }
   
@@ -24,7 +24,7 @@ async function createTrainee() {
 }
 
 async function traineeDelete() {
-  const id = document.getElementById('id-input-delete').value;
+  const id = document.getElementById('id-delete').value;
   remove(id, '/trainee');
 }
 

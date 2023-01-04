@@ -1,5 +1,5 @@
 async function trainingGet() {
-  const id = document.getElementById('id-input-get').value;
+  const id = document.getElementById('id-get').value;
   get(id, '/training');
 }
   
@@ -20,7 +20,7 @@ async function createTraining() {
 }
   
 async function trainingDelete() {
-  const id = document.getElementById('id-input-delete').value;
+  const id = document.getElementById('id-delete').value;
   remove(id, '/training');  
 }
   

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Trainee</title>
+  <title>Training</title>
 </head>
 <body>
   <header>
-    <h1> Trainee </h1>
+    <h1> Training </h1>
     <nav>
       <ul>
         <li><a href="coach.html">Coach</a></li>
@@ -18,60 +18,56 @@
 
     <section id="getRequest">
       <h2>Get</h2>
-      <label for="id-input-get">ID:</label>
-      <input type="text" id="id-input-get" />
+      <label for="id-get">ID:</label>
+      <input type="text" id="id-get" />
       <br />
-      <button onclick="traineeGet()">Get Trainee</button>
+      <button onclick="trainingGet()">Get Training</button>
       <br />
       <textarea id="responseGet"></textarea>
     </section>
 
-    <section id="postTrainee">        
-      <h2>Create Trainee</h2>
+    <section id="postTraining">        
+      <h2>Create Training</h2>
       <form>
-      <label for="username-input-post">Username:</label><br>
-      <input type="text" id="username-input-post" name="username"><br>
-      <label for="password-input-post">Password:</label><br>
-      <input type="text" id="password-input-post" name="password"><br>
-      <label for="email-input-post">Email:</label><br>
-      <input type="text" id="email-input-post" name="email"><br>
-      <label for="first-name-input-post">First Name:</label><br>
-      <input type="text" id="first-name-input-post" name="firstName"><br>
-      <label for="second-name-input-post">Second Name:</label><br>
-      <input type="text" id="second-name-input-post" name="secondName"><br>
-      <label for="skill-cap-input-post">Skill Cap:</label><br>
-      <input type="text" id="skill-cap-input-post" name="skillCap"><br>
-      <button type="button" onclick="createTrainee()">Create Trainee</button>
+        <label for="id-coach-post">Coach ID:</label><br>
+        <input type="text" id="id-coach-post"><br>
+        <label for="id-place-post">Place ID:</label><br>
+        <input type="text" id="id-place-post"><br>
+        <label for="date-of-training-post">Timestamp:</label><br>
+        <input type="text" id="date-of-training-post"><br>
+        <label for="description-post">Description:</label><br>
+        <input type="text" id="description-post"><br>
+      <button type="button" onclick="createTraining()">Create Training</button>
       </form> 
       <textarea id="responsePost" rows="10" cols="50"></textarea>
     </section>
 
     <section id="deleteRequest">
       <h2>Delete</h2>
-      <label for="id-input-delete">ID:</label>
-      <input type="text" id="id-input-delete" />
-      <button onclick="traineeDelete()">Delete Trainee</button>
+      <label for="id-delete">ID:</label>
+      <input type="text" id="id-delete" />
+      <button onclick="trainingDelete()">Delete Training</button>
       <textarea id="responseDelete"></textarea>
     </section>
 
-    <section id="updateTrainee">
-      <h2>Create Trainee</h2>
+    <section id="updateTraining">
+      <h2>Update Training</h2>
       <form>
-        <label for="id-update">Trainee ID:</label><br>
-        <input type="text" id="id-update" name="id"><br>
-        <label for="username-input-update">Username:</label><br>
-        <input type="text" id="username-input-update" name="username"><br>
-        <label for="password-input-update">Password:</label><br>
-        <input type="text" id="password-input-update" name="password"><br>
-        <label for="email-input-update">Email:</label><br>
-        <input type="text" id="email-input-update" name="email"><br>
-        <label for="first-name-input-update">First Name:</label><br>
-        <input type="text" id="first-name-input-update" name="firstName"><br>
-        <label for="second-name-input-update">Second Name:</label><br>
-        <input type="text" id="second-name-input-update" name="secondName"><br>
-        <label for="skill-cap-input-update">Skill Cap:</label><br>
-        <input type="text" id="skill-cap-input-update" name="skillCap"><br>
-        <button type="button" onclick="updateTrainee()">Update Trainee</button>
+
+        <label for="id-update">ID:</label><br>
+        <input type="text" id="id-update"><br>
+        <label for="id-coach-update">Coach ID:</label><br>
+        <input type="text" id="id-coach-update"><br>
+        <label for="id-place-update">Place ID:</label><br>
+        <input type="text" id="id-place-update"><br>
+        <label for="date-of-training-update">Timestamp:</label><br>
+        <input type="text" id="date-of-training-update"><br>
+        <label for="description-update">Description:</label><br>
+        <input type="text" id="description-update"><br>
+        <label for="participating-trainees-ids-update">Participating Trainees IDs:</label><br>
+        <input type="text" id="participating-trainees-ids-update"><br>
+
+        <button type="button" onclick="updateTraining()">Update Training</button>
       </form> 
       <textarea id="responsePut" rows="10" cols="50"></textarea>
     </section>
@@ -79,6 +75,6 @@
   <footer>
     <p>Copyright 2022</p>
   </footer>
-  <script src="trainee.js"></script>
+  <script src="training.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 async function placeGet() {
-  const id = document.getElementById('id-input-get').value;
+  const id = document.getElementById('id-get').value;
   get(id, '/place');
 }
   
@@ -16,7 +16,7 @@ async function createPlace() {
 }
   
 async function placeDelete() {
-  const id = document.getElementById('id-input-delete').value;
+  const id = document.getElementById('id-delete').value;
   remove(id, '/place')
 }
   
