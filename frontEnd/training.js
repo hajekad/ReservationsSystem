@@ -45,7 +45,6 @@ async function updateTraining() {
   update(trainingDto, '/training');
 }
   
-  
 function addInput() {
   const inputContainer = document.getElementById('input-container');
   const input = document.createElement('input');
@@ -53,19 +52,6 @@ function addInput() {
   input.className = 'traineesInput';
   inputContainer.appendChild(input);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 async function get(id, at) {
   try {

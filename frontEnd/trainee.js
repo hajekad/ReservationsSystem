@@ -1,3 +1,91 @@
+async function findMatch() {
+  const range = document.getElementById('range-find-match').value;
+  const id = document.getElementById('id-find-match').value;
+  const username = document.getElementById('username-find-match').value;
+  const password = document.getElementById('password-find-match').value;
+  const email = document.getElementById('email-find-match').value;
+  const firstName = document.getElementById('first-name-find-match').value;
+  const secondName = document.getElementById('second-name-find-match').value;
+  const skillCap = document.getElementById('skill-cap-find-match').value;
+  const inputs = document.querySelectorAll('.trainingInputFindMatch');
+  const trainings = Array.from(inputs).map(input => Number(input.value));
+  
+  const traineeDto = {
+      id: id,
+      username: username,
+      password: password,
+      email: email,
+      firstName: firstName,
+      secondName: secondName,
+      skillCap: skillCap,
+      trainings: trainings
+  };
+
+  try {
+    const response = await fetch(`http://localhost:6060/trainee/bussiness?range=${range}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(traineeDto)
+    });
+    if (response.ok) {
+      const responseJson = await response.json();
+      console.log("JSON:\n" + JSON.stringify(responseJson, null, 2));
+      document.getElementById('responseFindMatch').value = JSON.stringify(responseJson, null, 2);
+    } else {
+      console.error(`Error: ${response.status} ${response.statusText}`);
+      document.getElementById('responseFindMatch').value = `Error: ${response.status} ${response.statusText}`;
+    }
+  } catch (error) {
+    console.error(error);
+    document.getElementById('responseFindMatch').value = error.toString();
+  }
+}
+
+async function assignTraining() {
+  const id = document.getElementById('id-assign-training').value;
+  const username = document.getElementById('username-assign-training').value;
+  const password = document.getElementById('password-assign-training').value;
+  const email = document.getElementById('email-assign-training').value;
+  const firstName = document.getElementById('first-name-assign-training').value;
+  const secondName = document.getElementById('second-name-assign-training').value;
+  const skillCap = document.getElementById('skill-cap-assign-training').value;
+  const inputs = document.querySelectorAll('.trainingInputAssignTraining');
+  const trainings = Array.from(inputs).map(input => Number(input.value));
+
+  const from = document.getElementById('from-assign-training').value;
+  const to = document.getElementById('to-assign-training').value;
+  
+  const traineeDto = {
+      id: id,
+      username: username,
+      password: password,
+      email: email,
+      firstName: firstName,
+      secondName: secondName,
+      skillCap: skillCap,
+      trainings: trainings
+  };
+
+  try {
+    const response = await fetch(`http://localhost:6060/trainee/bussiness?from=${from}&to=${to}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(traineeDto)
+    });
+    if (response.ok) {
+      const responseJson = await response.json();
+      console.log("JSON:\n" + JSON.stringify(responseJson, null, 2));
+      document.getElementById('responseAssignTraining').value = JSON.stringify(responseJson, null, 2);
+    } else {
+      console.error(`Error: ${response.status} ${response.statusText}`);
+      document.getElementById('responseAssignTraining').value = `Error: ${response.status} ${response.statusText}`;
+    }
+  } catch (error) {
+    console.error("Error: one of the ids does not exist.");
+    document.getElementById('responseAssignTraining').value = "Error: one of the ids does not exist.";
+  }
+}
+
 async function traineeGet() {
   const id = document.getElementById('id-get').value;
   get(id, '/trainee');
@@ -53,7 +141,6 @@ async function updateTrainee() {
   update(traineeDto, '/trainee');
 }
 
-
 function addInput() {
   const inputContainer = document.getElementById('input-container');
   const input = document.createElement('input');
@@ -61,11 +148,6 @@ function addInput() {
   input.className = 'trainingInput';
   inputContainer.appendChild(input);
 }
-
-
-
-
-
 
 async function get(id, at) {
   try {

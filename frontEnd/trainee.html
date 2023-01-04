@@ -16,6 +16,54 @@
   </header>
   <main>
 
+    <section id="findMatch">        
+      <h2>Find Match</h2>
+      <form>
+      <label for="range-find-match">Range:</label><br>
+      <input type="number" id="range-find-match"><br><br>
+      <label for="username-find-match">Username:</label><br>
+      <input type="number" id="username-find-match"><br>
+      <label for="password-find-match">Password:</label><br>
+      <input type="password" id="password-find-match"><br>
+      <label for="email-find-match">Email:</label><br>
+      <input type="email" id="email-find-match"><br>
+      <label for="first-name-find-match">First Name:</label><br>
+      <input type="text" id="first-name-find-match"><br>
+      <label for="second-name-find-match">Second Name:</label><br>
+      <input type="text" id="second-name-find-match"><br>
+      <label for="skill-cap-find-match">Skill Cap:</label><br>
+      <input type="number" id="skill-cap-find-match"><br>
+      <button type="button" onclick="findMatch()">Find Match</button>
+      </form> 
+      <textarea id="responseFindMatch" rows="10" cols="50"></textarea>
+    </section>
+
+    <section id="assignTraining">        
+      <h2>Assign training</h2>
+      <form>
+      <label for="username-assign-training">Username:</label><br>
+      <input type="number" id="username-assign-training"><br>
+      <label for="password-assign-training">Password:</label><br>
+      <input type="password" id="password-assign-training"><br>
+      <label for="email-assign-training">Email:</label><br>
+      <input type="email" id="email-assign-training"><br>
+      <label for="first-name-assign-training">First Name:</label><br>
+      <input type="text" id="first-name-assign-training"><br>
+      <label for="second-name-assign-training">Second Name:</label><br>
+      <input type="text" id="second-name-assign-training"><br>
+      <label for="skill-cap-assign-training">Skill Cap:</label><br>
+      <input type="number" id="skill-cap-assign-training"><br>
+
+      <label for="from-assign-training">Second Name:</label><br>
+      <input type="datetime-local" id="from-assign-training"><br>
+      <label for="to-assign-training">Skill Cap:</label><br>
+      <input type="datetime-local" id="to-assign-training"><br>
+      
+      <button type="button" onclick="assignTraining()">Create Trainee</button>
+      </form> 
+      <textarea id="responseAssignTraining" rows="10" cols="50"></textarea>
+    </section>
+
     <section id="getRequest">
       <h2>Get</h2>
       <label for="id-get">ID:</label>
