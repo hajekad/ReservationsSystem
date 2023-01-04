@@ -140,7 +140,7 @@ async function update(dto, at) {
       document.getElementById('responsePost').value = `Error: ${response.status} ${response.statusText}`;
     }
   } catch (error) {
-    console.error(error);
-    document.getElementById('responsePost').value = error.toString();
+    console.error("Error: one of the ids does not exist.");
+    document.getElementById('responsePost').value = "Error: one of the ids does not exist.";
   }
 }

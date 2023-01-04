@@ -135,13 +135,13 @@ async function update(dto, at) {
     if (response.ok) {
       const responseJson = await response.json();
       console.log("JSON:\n" + JSON.stringify(responseJson, null, 2));
-      document.getElementById('responsePost').value = JSON.stringify(responseJson, null, 2);
+      document.getElementById('responseUpdate').value = JSON.stringify(responseJson, null, 2);
     } else {
       console.error(`Error: ${response.status} ${response.statusText}`);
-      document.getElementById('responsePost').value = `Error: ${response.status} ${response.statusText}`;
+      document.getElementById('responseUpdate').value = `Error: ${response.status} ${response.statusText}`;
     }
   } catch (error) {
-    console.error(error);
-    document.getElementById('responsePost').value = error.toString();
+    console.error("Error: one of the ids does not exist.");
+    document.getElementById('responseUpdate').value = "Error: one of the ids does not exist.";
   }
 }
