@@ -9,7 +9,7 @@
     <nav>
       <ul>
         <li><a href="coach.html">Coach</a></li>
-        <li><a href="training.html">Training</a></li>
+        <li><a href="trainee.html">Trainee</a></li>
         <li><a href="place.html">Place</a></li>
       </ul>
     </nav>
@@ -19,7 +19,7 @@
     <section id="getRequest">
       <h2>Get</h2>
       <label for="id-get">ID:</label>
-      <input type="text" id="id-get" />
+      <input type="number" id="id-get" />
       <br />
       <button onclick="trainingGet()">Get Training</button>
       <br />
@@ -30,11 +30,11 @@
       <h2>Create Training</h2>
       <form>
         <label for="id-coach-post">Coach ID:</label><br>
-        <input type="text" id="id-coach-post"><br>
+        <input type="number" id="id-coach-post"><br>
         <label for="id-place-post">Place ID:</label><br>
-        <input type="text" id="id-place-post"><br>
+        <input type="number" id="id-place-post"><br>
         <label for="date-of-training-post">Timestamp: (YYYY-MM-DD HH:MM:SS)</label><br>
-        <input type="text" id="date-of-training-post"><br>
+        <input type="datetime-local" id="date-of-training-post"><br>
         <label for="description-post">Description:</label><br>
         <input type="text" id="description-post"><br>
       <button type="button" onclick="createTraining()">Create Training</button>
@@ -53,13 +53,13 @@
     <section id="updateTraining">
       <h2>Update Training</h2>
         <label for="id-update">ID:</label><br>
-        <input type="text" id="id-update"><br>
+        <input type="number" id="id-update"><br>
         <label for="id-coach-update">Coach ID:</label><br>
-        <input type="text" id="id-coach-update"><br>
+        <input type="number" id="id-coach-update"><br>
         <label for="id-place-update">Place ID:</label><br>
-        <input type="text" id="id-place-update"><br>
+        <input type="number" id="id-place-update"><br>
         <label for="date-of-training-update">Timestamp: (YYYY-MM-DD HH:MM:SS)</label><br>
-        <input type="text" id="date-of-training-update"><br>
+        <input type="datetime-local" id="date-of-training-update"><br>
         <label for="description-update">Description:</label><br>
         <input type="text" id="description-update"><br>
         <label for="participating-trainees-ids-update">Participating Trainees IDs:</label><br>

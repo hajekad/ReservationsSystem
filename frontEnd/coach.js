@@ -1,3 +1,29 @@
+async function alterTrainee()
+{
+  const idCoach = document.getElementById('id-coach-bussiness-update').value;
+  const idTrainee = document.getElementById('id-trainee-bussiness-update').value;
+  const skillCap = document.getElementById('skill-cap-bussiness-update').value;
+
+  try {
+    const response = await fetch(`http://localhost:6060/coach/bussiness?idCoach=${idCoach}&idTrainee=${idTrainee}&skillCap=${skillCap}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dto)
+    });
+    if (response.ok) {
+      const responseJson = await response.json();
+      console.log("JSON:\n" + JSON.stringify(responseJson, null, 2));
+      document.getElementById('responseBussinessAlter').value = JSON.stringify(responseJson, null, 2);
+    } else {
+      console.error(`Error: ${response.status} ${response.statusText}`);
+      document.getElementById('responseBussinessAlter').value = `Error: ${response.status} ${response.statusText}`;
+    }
+  } catch (error) {
+    console.error("Error: one of the ids does not exist.");
+    document.getElementById('responseBussinessAlter').value = "Error: one of the ids does not exist.";
+  }
+}
+
 async function coachGet() {
   const id = document.getElementById('id-get').value;
   get(id, '/coach');

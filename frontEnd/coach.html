@@ -15,11 +15,26 @@
     </nav>
   </header>
   <main>
+    <section id="alterTrainee">
+      <h2>Evaluate Trainee</h2>
+      <label for="id-coach-bussiness-update">Id coach:</label>
+        <input type="number" id="id-coach-bussiness-update" />
+        <br />
+        <label for="id-trainee-bussiness-update">Id trainee:</label>
+        <input type="number" id="id-trainee-bussiness-update" />
+        <br />
+        <label for="skill-cap-bussiness-update">Skill cap:</label>
+        <input type="number" id="skill-cap-bussiness-update" />
+        <br />
+      <button onclick="alterTrainee()">Evaluate Trainee</button>
+      <br />
+      <textarea id="responseBussinessAlter"></textarea>
+    </section>
 
     <section id="getCoach">
       <h2>Get</h2>
       <label for="id-get">ID:</label>
-      <input type="text" id="id-get" />
+      <input type="number" id="id-get" />
       <br />
       <button onclick="coachGet()">Get Coach</button>
       <br />
@@ -29,7 +44,7 @@
     <section id="postCoach">
         <h2>Post</h2>
         <label for="cost-rate-post">Cost rate:</label>
-        <input type="text" id="cost-rate-post" />
+        <input type="number" id="cost-rate-post" />
         <br />
         <label for="password-post">Password:</label>
         <input type="password" id="password-post" />
@@ -51,7 +66,7 @@
     <section id="deleteRequest">
       <h2>Delete</h2>
       <label for="id-delete">ID:</label>
-      <input type="text" id="id-delete" />
+      <input type="number" id="id-delete" />
       <button onclick="coachDelete()">Delete Coach</button>
       <textarea id="responseDelete"></textarea>
     </section>
@@ -59,7 +74,7 @@
     <section id="updateCoach">
       <h2>Update</h2>
       <label for="id-update">Id:</label>
-      <input type="text" id="id-update" />
+      <input type="number" id="id-update" />
       <br />
       <label for="cost-rate-update">Cost rate:</label>
       <input type="number" id="cost-rate-update" min="0" max="10000" />

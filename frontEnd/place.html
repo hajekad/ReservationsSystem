@@ -19,7 +19,7 @@
     <section id="getRequest">
       <h2>Get</h2>
       <label for="id-get">ID:</label>
-      <input type="text" id="id-get" />
+      <input type="number" id="id-get" />
       <br />
       <button onclick="placeGet()">Get Place</button>
       <br />
@@ -30,9 +30,9 @@
       <h2>Create Place</h2>
       <form>
       <label for="longitude-post">Longitude:</label><br>
-      <input type="text" id="longitude-post"><br>
+      <input type="number" id="longitude-post"><br>
       <label for="latitude-post">Latitude:</label><br>
-      <input type="text" id="latitude-post"><br>
+      <input type="number" id="latitude-post"><br>
       </form>
       <button onclick="createPlace()">Create Place</button>
         <br />
@@ -42,7 +42,7 @@
     <section id="deleteRequest">
       <h2>Delete</h2>
       <label for="id-delete">ID:</label>
-      <input type="text" id="id-delete" />
+      <input type="number" id="id-delete" />
       <button onclick="placeDelete()">Delete Place</button>
       <textarea id="responseDelete"></textarea>
     </section>
@@ -50,11 +50,11 @@
     <section id="updatePlace">        
       <h2>Update Place</h2>
       <label for="id-update">Id:</label><br>
-      <input type="text" id="id-update"><br>
+      <input type="number" id="id-update"><br>
       <label for="longitude-update">Longitude:</label><br>
-      <input type="text" id="longitude-update"><br>
+      <input type="number" id="longitude-update"><br>
       <label for="latitude-update">Latitude:</label><br>
-      <input type="text" id="latitude-update"><br>
+      <input type="number" id="latitude-update"><br>
 
       <label for="trainings-update">Trainings:</label>
       <div id="input-container"></div>
