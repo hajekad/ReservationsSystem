@@ -52,8 +52,6 @@
 
     <section id="updateTraining">
       <h2>Update Training</h2>
-      <form>
-
         <label for="id-update">ID:</label><br>
         <input type="text" id="id-update"><br>
         <label for="id-coach-update">Coach ID:</label><br>
@@ -65,10 +63,11 @@
         <label for="description-update">Description:</label><br>
         <input type="text" id="description-update"><br>
         <label for="participating-trainees-ids-update">Participating Trainees IDs:</label><br>
-        <input type="text" id="participating-trainees-ids-update"><br>
+        <div id="input-container"></div>
+        <button onclick="addInput()">Add Input</button>
+        <br />
 
         <button type="button" onclick="updateTraining()">Update Training</button>
-      </form> 
       <textarea id="responsePut" rows="10" cols="50"></textarea>
     </section>
   </main>

@@ -56,7 +56,6 @@
 
     <section id="updateTrainee">
       <h2>Update Trainee</h2>
-      <form>
         <label for="id-update">Trainee ID:</label><br>
         <input type="text" id="id-update"><br>
         <label for="username-update">Username:</label><br>
@@ -71,8 +70,13 @@
         <input type="text" id="second-name-update"><br>
         <label for="skill-cap-update">Skill Cap:</label><br>
         <input type="text" id="skill-cap-update"><br>
+
+        <label for="trainings-update">Trainings:</label>
+        <div id="input-container"></div>
+        <button onclick="addInput()">Add Input</button>
+        <br />
+
         <button type="button" onclick="updateTrainee()">Update Trainee</button>
-      </form> 
       <textarea id="responsePut" rows="10" cols="50"></textarea>
     </section>
   </main>

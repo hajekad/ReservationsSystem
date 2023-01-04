@@ -30,7 +30,8 @@ async function updateTraining() {
   const idPlace = document.getElementById('id-place-update').value;
   const dateOfTraining = document.getElementById('date-of-training-update').value;
   const description = document.getElementById('description-update').value;
-  const participatingTraineesIds = document.getElementById('participating-trainees-ids-update').value;
+  const inputs = document.querySelectorAll('.traineesInput');
+  const participatingTraineesIds = Array.from(inputs).map(input => Number(input.value));
 
   const trainingDto = {
     id: id,
@@ -49,7 +50,7 @@ function addInput() {
   const inputContainer = document.getElementById('input-container');
   const input = document.createElement('input');
   input.type = 'number';
-  input.className = 'trainingInput';
+  input.className = 'traineesInput';
   inputContainer.appendChild(input);
 }
 

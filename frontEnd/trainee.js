@@ -30,13 +30,14 @@ async function traineeDelete() {
 
 async function updateTrainee() {
   const id = document.getElementById('id-update').value;
-  const username = document.getElementById('username-post').value;
-  const password = document.getElementById('password-post').value;
-  const email = document.getElementById('email-post').value;
-  const firstName = document.getElementById('first-name-post').value;
-  const secondName = document.getElementById('second-name-post').value;
-  const skillCap = document.getElementById('skill-cap-post').value;
-  const trainings = document.getElementById('trainings-update').value;
+  const username = document.getElementById('username-update').value;
+  const password = document.getElementById('password-update').value;
+  const email = document.getElementById('email-update').value;
+  const firstName = document.getElementById('first-name-update').value;
+  const secondName = document.getElementById('second-name-update').value;
+  const skillCap = document.getElementById('skill-cap-update').value;
+  const inputs = document.querySelectorAll('.trainingInput');
+  const trainings = Array.from(inputs).map(input => Number(input.value));
   
   const traineeDto = {
       id: id,

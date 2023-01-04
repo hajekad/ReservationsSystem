@@ -24,7 +24,8 @@ async function updatePlace() {
   const id = document.getElementById('id-update').value;
   const latitude = document.getElementById('latitude-update').value;
   const longitude = document.getElementById('longitude-update').value;
-  const trainings = document.getElementById('trainings-update').value;
+  const inputs = document.querySelectorAll('.trainingInput');
+  const trainings = Array.from(inputs).map(input => Number(input.value));
 
   const placeDto = {
       id: id, 

@@ -47,16 +47,20 @@
 
     <section id="updatePlace">        
       <h2>Update Place</h2>
-      <form>
       <label for="id-update">Id:</label><br>
       <input type="text" id="id-update"><br>
       <label for="longitude-update">Longitude:</label><br>
       <input type="text" id="longitude-update"><br>
       <label for="latitude-updpate">Latitude:</label><br>
       <input type="text" id="latitude-udpate"><br>
-      <label for="training-update">Trainings:</label><br>
-      <input type="text" id="training-update"><br>
-      </form> 
+
+      <label for="trainings-update">Trainings:</label>
+      <div id="input-container"></div>
+      <button onclick="addInput()">Add Input</button>
+      <br />
+
+      <button onclick="updatePlace()">Update Place</button>
+      <br />
       <textarea id="responsePost" rows="10" cols="50"></textarea>
     </section>
   </main>
