@@ -23,7 +23,7 @@ async function findMatch() {
 
   try {
     const response = await fetch(`http://localhost:6060/trainee/bussiness?range=${range}`, {
-      method: 'GET',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(traineeDto)
     });
@@ -52,9 +52,14 @@ async function assignTraining() {
   const inputs = document.querySelectorAll('.trainingInputAssignTraining');
   const trainings = Array.from(inputs).map(input => Number(input.value));
 
-  const from = document.getElementById('from-assign-training').value;
-  const to = document.getElementById('to-assign-training').value;
+  const fromDL = document.getElementById('from-assign-training').value;
+  const toDL = document.getElementById('to-assign-training').value;
+
+  const from = convertDatetimeLocal(fromDL);
+  const to = convertDatetimeLocal(toDL);
   
+  console.log(`${fromDL} -> ${from}\n${toDL} -> ${to}`);
+
   const traineeDto = {
       id: id,
       username: username,
@@ -140,6 +145,26 @@ async function updateTrainee() {
 
   update(traineeDto, '/trainee');
 }
+
+function convertDatetimeLocal(input) { 
+  const timestamp = Date.parse(input);
+  
+  if (isNaN(timestamp)) {
+    return 'Invalid Date';
+  }
+  
+  const date = new Date(timestamp);
+  
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  
+  return `${year}-${month}-${day} ${hour}:${minute}:00`;
+}
+
 
 function addInput() {
   const inputContainer = document.getElementById('input-container');

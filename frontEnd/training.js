@@ -6,7 +6,7 @@ async function trainingGet() {
 async function createTraining() {
   const idCoach = document.getElementById('id-coach-post').value;
   const idPlace = document.getElementById('id-place-post').value;
-  const dateOfTraining = document.getElementById('date-of-training-post').value;
+  const dateOfTraining = convertDatetimeLocal(document.getElementById('date-of-training-post').value);
   const description = document.getElementById('description-post').value;
 
   const createTrainingDto = {
@@ -28,7 +28,7 @@ async function updateTraining() {
   const id = document.getElementById('id-update').value;
   const idCoach = document.getElementById('id-coach-update').value;
   const idPlace = document.getElementById('id-place-update').value;
-  const dateOfTraining = document.getElementById('date-of-training-update').value;
+  const dateOfTraining = convertDatetimeLocal(document.getElementById('date-of-training-update').value);
   const description = document.getElementById('description-update').value;
   const inputs = document.querySelectorAll('.traineesInput');
   const participatingTraineesIds = Array.from(inputs).map(input => Number(input.value));
@@ -130,4 +130,23 @@ async function update(dto, at) {
     console.error("Error: one of the ids does not exist.");
     document.getElementById('responseUpdate').value = "Error: one of the ids does not exist.";
   }
+}
+
+function convertDatetimeLocal(input) { 
+  const timestamp = Date.parse(input);
+  
+  if (isNaN(timestamp)) {
+    return 'Invalid Date';
+  }
+  
+  const date = new Date(timestamp);
+  
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  
+  return `${year}-${month}-${day} ${hour}:${minute}:00`;
 }

@@ -38,7 +38,7 @@ public class TraineeController {
         return ResponseEntity.ok().body(ret);
     }
 
-    @GetMapping("/bussiness")
+    @PostMapping("/bussiness")
     public ResponseEntity findMatch(@RequestParam int range, @RequestBody TraineeDto challenger) {
         TraineeDto ret;
 
