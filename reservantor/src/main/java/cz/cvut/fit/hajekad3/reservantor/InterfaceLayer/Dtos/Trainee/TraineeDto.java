@@ -10,6 +10,7 @@ public class TraineeDto {
     private String firstName;
     private String secondName;
     private int skillCap;
+    private int credit;
     private Collection<Long> trainings;
     public TraineeDto() {}
 
@@ -75,5 +76,13 @@ public class TraineeDto {
 
     public void setTrainings(Collection<Long> trainings) {
         this.trainings = trainings;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
     }
 }

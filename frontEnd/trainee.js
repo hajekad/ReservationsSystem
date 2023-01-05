@@ -9,7 +9,8 @@ async function findMatch() {
   const skillCap = document.getElementById('skill-cap-find-match').value;
   const inputs = document.querySelectorAll('.trainingInputFindMatch');
   const trainings = Array.from(inputs).map(input => Number(input.value));
-  
+  const credit = document.getElementById('credit-find-match').value;
+
   const traineeDto = {
       id: id,
       username: username,
@@ -18,7 +19,8 @@ async function findMatch() {
       firstName: firstName,
       secondName: secondName,
       skillCap: skillCap,
-      trainings: trainings
+      trainings: trainings,
+      credit: credit
   };
 
   try {
@@ -51,6 +53,7 @@ async function assignTraining() {
   const skillCap = document.getElementById('skill-cap-assign-training').value;
   const inputs = document.querySelectorAll('.trainingInputAssignTraining');
   const trainings = Array.from(inputs).map(input => Number(input.value));
+  const credit = document.getElementById('credit-assign-training').value;
 
   const fromDL = document.getElementById('from-assign-training').value;
   const toDL = document.getElementById('to-assign-training').value;
@@ -68,7 +71,8 @@ async function assignTraining() {
       firstName: firstName,
       secondName: secondName,
       skillCap: skillCap,
-      trainings: trainings
+      trainings: trainings,
+      credit: credit
   };
 
   try {
@@ -131,7 +135,8 @@ async function updateTrainee() {
   const skillCap = document.getElementById('skill-cap-update').value;
   const inputs = document.querySelectorAll('.trainingInput');
   const trainings = Array.from(inputs).map(input => Number(input.value));
-  
+  const credit = document.getElementById('credit-update').value;
+
   const traineeDto = {
       id: id,
       username: username,
@@ -140,7 +145,8 @@ async function updateTrainee() {
       firstName: firstName,
       secondName: secondName,
       skillCap: skillCap,
-      trainings: trainings
+      trainings: trainings,
+      credit: credit
   };
 
   update(traineeDto, '/trainee');

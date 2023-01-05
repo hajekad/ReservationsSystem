@@ -7,8 +7,11 @@ public class CreateTraineeDto {
     private String firstName;
     private String secondName;
     private int skillCap;
+    private int credit;
 
-    public CreateTraineeDto() {}
+    public CreateTraineeDto() {
+        credit = 0;
+    }
 
     public String getUsername() {
         return username;
@@ -56,6 +59,14 @@ public class CreateTraineeDto {
 
     public void setSkillCap(int skillCap) {
         this.skillCap = skillCap;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
     }
 }
 

@@ -23,6 +23,9 @@ public class Trainee {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "credit", nullable = true)
+    private int credit;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -48,6 +51,7 @@ public class Trainee {
         setFirstName(traineeDto.getFirstName());
         setSecondName(traineeDto.getSecondName());
         setUsername(traineeDto.getUsername());
+        setCredit(0);
         setSkillCap(50);
     }
 
@@ -61,6 +65,7 @@ public class Trainee {
         setSecondName(traineeDto.getSecondName());
         setUsername(traineeDto.getUsername());
         setSkillCap(traineeDto.getSkillCap());
+        setCredit(traineeDto.getCredit());
     }
 
     public TraineeDto convertToDto()
@@ -80,6 +85,7 @@ public class Trainee {
         ret.setSecondName(getSecondName());
         ret.setUsername(getUsername());
         ret.setSkillCap(getSkillCap());
+        ret.setCredit(getCredit());
 
         return ret;
     }
@@ -146,5 +152,13 @@ public class Trainee {
 
     public void setTrainings(Collection<Training> trainings) {
         this.trainings = trainings;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public void setCredit(int credit) {
+        this.credit = credit;
     }
 }
