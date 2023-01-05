@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 @Entity(name = "Coach")
 public class Coach {
@@ -47,6 +48,9 @@ public class Coach {
     }
 
     public Coach(CoachDto coachDto) {
+        if(coachDto.getId() == null)
+            throw new NoSuchElementException();
+
         this.trainings = new ArrayList<Training>();
         setId(coachDto.getId());
         setCostRate(coachDto.getCostRate());

@@ -53,10 +53,10 @@ public class CoachService {
     }
 
     public CoachDto updateCoach(CoachDto coachDto) {
+        Coach currCoach = new Coach(coachDto);
+
         if(!coachRepositoryJpa.existsById(coachDto.getId()))
             throw new NoSuchElementException("Error: Coach does not exist. id: " + coachDto.getId());
-
-        Coach currCoach = new Coach(coachDto);
 
         ArrayList<Training> tmp = new ArrayList<Training>();
         Training training = null;

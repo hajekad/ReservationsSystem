@@ -32,6 +32,9 @@ public class TraineeService {
     private ITrainingRepositoryExtraMethods trainingRepositoryExtraMethods;
 
     private Trainee dtoToTrainee(TraineeDto traineeDto) {
+        if(traineeDto.getId() == null)
+            throw new NoSuchElementException();
+
         Trainee ret = new Trainee(traineeDto);
 
         ArrayList<Training> tmp = new ArrayList<Training>();
@@ -111,10 +114,10 @@ public class TraineeService {
     }
 
     public TraineeDto updateTrainee(TraineeDto traineeDto) {
+        Trainee currTrainee = dtoToTrainee(traineeDto);
+
         if(!traineeRepositoryJpa.existsById(traineeDto.getId()))
             throw new NoSuchElementException("Error: Trainee does not exist. id: " + traineeDto.getId());
-
-        Trainee currTrainee = dtoToTrainee(traineeDto);
 
         return traineeRepositoryJpa.save(currTrainee).convertToDto();
     }
