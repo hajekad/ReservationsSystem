@@ -90,18 +90,6 @@ public class TraineeService {
 
         Training chosenTraining = availableTrainings.get(0);
 
-        Collection<Training> newTrainingList = trainee.getTrainings();
-        Collection<Trainee> newTraineeList = chosenTraining.getParticipatingTrainees();
-
-        newTrainingList.add(chosenTraining);
-        newTraineeList.add(trainee);
-
-        chosenTraining.setParticipatingTrainees(newTraineeList);
-        trainee.setTrainings(newTrainingList);
-
-        trainingRepositoryJpa.save(chosenTraining);
-        traineeRepositoryJpa.save(trainee);
-
         return chosenTraining.convertToDto();
     }
 

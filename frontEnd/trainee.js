@@ -63,7 +63,7 @@ async function assignTraining() {
   
   console.log(`${fromDL} -> ${from}\n${toDL} -> ${to}`);
 
-  const traineeDto = {
+  this.traineeDto = {
       id: id,
       username: username,
       password: password,
@@ -75,24 +75,57 @@ async function assignTraining() {
       credit: credit
   };
 
-  try {
+  //try {
     const response = await fetch(`http://localhost:6060/trainee/bussiness?from=${from}&to=${to}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(traineeDto)
     });
     if (response.ok) {
-      const responseJson = await response.json();
-      console.log("JSON:\n" + JSON.stringify(responseJson, null, 2));
-      document.getElementById('responseAssignTraining').value = JSON.stringify(responseJson, null, 2);
+      this.responseTraining = await response.json();
+      const idCoachTmp = responseTraining.idCoach;
+      const responseCoachTmp = await fetch(`http://localhost:6060/coach?id=${idCoachTmp}`);
+      const responseCoach = await responseCoachTmp.json();
+
+      if(credit * 1 >= responseCoach.costRate * 1) {
+        responseTraining.participatingTraineesIds.push(id);
+        traineeDto.trainings.push(responseTraining.id);
+        traineeDto.credit = (traineeDto.credit * 1) - (responseCoach.costRate * 1);
+
+        console.log(traineeDto);
+
+        const responseTrainingFinal = await fetch('http://localhost:6060/training', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(responseTraining)
+        });
+
+        const thisIsFinallyFinalTraining = await responseTrainingFinal.json();
+      
+        const responseTraineeFinal = await fetch('http://localhost:6060/trainee', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(traineeDto)
+        }); 
+
+        const thisIsFinallyFinalTrainee = await responseTraineeFinal.json();
+
+        console.log(thisIsFinallyFinalTraining);
+        console.log(thisIsFinallyFinalTrainee);
+        document.getElementById('responseAssignTraining').value = JSON.stringify(thisIsFinallyFinalTraining);
+      }
+      else {
+        console.error(`Error: Trainee is too poor. Trainee credit: ${credit * 1} cost: ${responseCoach.costRate}`);
+        document.getElementById('responseAssignTraining').value = `Error: Trainee is too poor. Trainee credit: ${credit * 1} cost: ${responseCoach.costRate * 1}`;
+      }
     } else {
       console.error(`Error: ${response.status} ${response.statusText}`);
       document.getElementById('responseAssignTraining').value = `Error: ${response.status} ${response.statusText}`;
     }
-  } catch (error) {
+  /*} catch (error) {
     console.error("Error: one of the ids does not exist.");
     document.getElementById('responseAssignTraining').value = "Error: one of the ids does not exist.";
-  }
+  }*/
 }
 
 async function traineeGet() {
