@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
 @Import(CorsConfig.class)
-@OpenAPIDefinition
 public class ReservantorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ReservantorApplication.class, args);
