@@ -248,7 +248,7 @@ async function update(dto, at) {
       document.getElementById('responseUpdate').value = `Error: ${response.status} ${response.statusText}`;
     }
   } catch (error) {
-    console.error("Error: one of the ids does not exist.");
-    document.getElementById('responseUpdate').value = "Error: one of the ids does not exist.";
+    console.error(`Error: Id not present in the database or training does not exist.`);
+    document.getElementById('responseUpdate').value = `Error: Error: Id not present in the database or training does not exist.`;
   }
 }

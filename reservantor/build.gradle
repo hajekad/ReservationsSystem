@@ -33,6 +33,12 @@ sourceSets {
 	}
 }
 
-tasks.named('test') {
+tasks.named('test', Test) {
 	useJUnitPlatform()
+}
+
+task runApp(type: JavaExec) {
+	dependsOn 'test'
+	classpath = sourceSets.main.runtimeClasspath
+	main = 'cz.cvut.fit.hajekad3.reservantor.ReservantorApplication'
 }
