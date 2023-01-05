@@ -14,6 +14,12 @@ public class CoachRepositoryExtraMethods implements ICoachRepositoryExtraMethods
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * decides whether coach has trained trainee
+     * @param trainee
+     * @param coach
+     * @return
+     */
     @Override
     public boolean coachTrainedTrainee(Trainee trainee, Coach coach) {
         String jpql = "SELECT t FROM Training t WHERE :coach = t.coach.id AND :trainee MEMBER OF t.participatingTrainees";

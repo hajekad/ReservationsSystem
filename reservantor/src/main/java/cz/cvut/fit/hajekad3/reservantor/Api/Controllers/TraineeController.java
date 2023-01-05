@@ -24,6 +24,13 @@ public class TraineeController {
 
     public TraineeController() {}
 
+    /**
+     * finds viable tarining in selected timeframe
+     * @param from
+     * @param to
+     * @param traineeDto
+     * @return
+     */
     @PutMapping("/bussiness")
     public ResponseEntity getTrainingInTimeFrame(@RequestParam String from, @RequestParam String to, @RequestBody TraineeDto traineeDto) {
         TrainingDto ret = null;
@@ -38,6 +45,12 @@ public class TraineeController {
         return ResponseEntity.ok().body(ret);
     }
 
+    /**
+     * matches the trainee with an opponent for a match
+     * @param highest difference in skill between matched trainees
+     * @param challenger
+     * @return
+     */
     @PostMapping("/bussiness")
     public ResponseEntity findMatch(@RequestParam int range, @RequestBody TraineeDto challenger) {
         TraineeDto ret;
@@ -53,6 +66,11 @@ public class TraineeController {
         return ResponseEntity.ok().body(ret);
     }
 
+    /**
+     * posts trainee
+     * @param traineeDto
+     * @return
+     */
     @PostMapping
     public ResponseEntity postTrainee(@RequestBody CreateTraineeDto traineeDto) {
         TraineeDto ret = traineeService.saveTrainee(traineeDto);
@@ -60,6 +78,11 @@ public class TraineeController {
         return ResponseEntity.created(URI.create(ret.getId().toString())).body(ret);
     }
 
+    /**
+     * gets trainee by id
+     * @param id
+     * @return
+     */
     @GetMapping
     public ResponseEntity getTrainee(@RequestParam Long id) {
         TraineeDto ret;
@@ -74,6 +97,11 @@ public class TraineeController {
         return ResponseEntity.ok(ret);
     }
 
+    /**
+     * updates trainee
+     * @param traineeDto
+     * @return
+     */
     @PutMapping
     public ResponseEntity updateTrainee(@RequestBody TraineeDto traineeDto) {
         TraineeDto ret;
@@ -88,6 +116,11 @@ public class TraineeController {
         return ResponseEntity.ok().body(ret);
     }
 
+    /**
+     * deletes trainee by id
+     * @param id
+     * @return
+     */
     @DeleteMapping
     ResponseEntity deleteTrainee(@RequestParam Long id) {
         try {

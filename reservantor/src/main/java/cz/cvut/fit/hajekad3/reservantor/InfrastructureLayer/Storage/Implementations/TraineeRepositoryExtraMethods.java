@@ -14,6 +14,12 @@ public class TraineeRepositoryExtraMethods implements ITraineeRepositoryExtraMet
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * finds a viable opponent in selected skill range
+     * @param range
+     * @param trainee
+     * @return
+     */
     @Override
     public List<Trainee> findMatch(int range, Trainee trainee) {
         String queryString = "SELECT DISTINCT t FROM Trainee t WHERE t.skillCap >= :traineeSkill - :range AND t.skillCap <= :traineeSkill + :range AND t.id != :traineeId";

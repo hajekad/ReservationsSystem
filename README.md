@@ -1,5 +1,11 @@
 # BI-TJV-semestral
-
+## Usage
+- create a database "db" in postgres
+- start the api server
+- launch index.html - frontEnd
+## Documentation
+    javadoc *
+- I am truly sorry but i used spring 3.0.1 which does not support OpenAPI documentation
 ## Description
 Simple reservation system for coaches and their trainees. A coach can set his operating hours and pick a place, a trainee can book coaches offered term.
 ## Business operations

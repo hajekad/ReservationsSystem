@@ -22,6 +22,11 @@ public class PlaceController {
 
     public PlaceController() {}
 
+    /**
+     * posts new place
+     * @param placeDto
+     * @return
+     */
     @PostMapping
     public ResponseEntity postPlace(@RequestBody CreatePlaceDto placeDto) {
         PlaceDto ret;
@@ -35,6 +40,11 @@ public class PlaceController {
         return ResponseEntity.created(URI.create(ret.getId().toString())).body(ret);
     }
 
+    /**
+     * gets Place by id
+     * @param id
+     * @return
+     */
     @GetMapping
     public ResponseEntity getPlace(@RequestParam Long id) {
         PlaceDto ret;
@@ -49,6 +59,11 @@ public class PlaceController {
         return ResponseEntity.ok(ret);
     }
 
+    /**
+     * updates place
+     * @param placeDto
+     * @return
+     */
     @PutMapping
     public ResponseEntity updatePlace(@RequestBody PlaceDto placeDto) {
         PlaceDto ret;
@@ -63,6 +78,11 @@ public class PlaceController {
         return ResponseEntity.ok().body(ret);
     }
 
+    /**
+     * deletes place by id
+     * @param id
+     * @return
+     */
     @DeleteMapping
     ResponseEntity deletePlace(@RequestParam Long id) {
         try {

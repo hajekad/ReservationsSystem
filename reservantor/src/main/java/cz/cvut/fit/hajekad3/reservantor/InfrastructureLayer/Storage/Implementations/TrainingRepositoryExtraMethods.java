@@ -15,6 +15,12 @@ public class TrainingRepositoryExtraMethods implements ITrainingRepositoryExtraM
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * finds trainings in selected time frame
+     * @param from
+     * @param to
+     * @return
+     */
     @Override
     public List<Training> trainingsInTimeframe(Timestamp from, Timestamp to) {
         String queryString = "SELECT DISTINCT t FROM Training t WHERE t.dateOfTraining >= :from AND t.dateOfTraining <= :to";

@@ -20,6 +20,13 @@ public class CoachController {
 
     public CoachController() {}
 
+    /**
+     * lets coaches update their trainees skillCap
+     * @param idCoach
+     * @param idTrainee
+     * @param skillCap
+     * @return
+     */
     @PutMapping("/bussiness")
     public ResponseEntity updateTraineesSkillCap(@RequestParam Long idCoach, @RequestParam Long idTrainee, @RequestParam int skillCap) {
         try {
@@ -33,6 +40,11 @@ public class CoachController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * posts coach
+     * @param coachDto
+     * @return
+     */
     @PostMapping
     public ResponseEntity postCoach(@RequestBody CreateCoachDto coachDto) {
         CoachDto ret = coachService.saveCoach(coachDto);
@@ -45,6 +57,11 @@ public class CoachController {
         return ResponseEntity.created(URI.create(reti)).body(ret);
     }
 
+    /**
+     * gets coach by id
+     * @param id
+     * @return
+     */
     @GetMapping
     public ResponseEntity getCoach(@RequestParam Long id) {
         CoachDto ret;
@@ -59,6 +76,11 @@ public class CoachController {
         return ResponseEntity.ok(ret);
     }
 
+    /**
+     * updates coach
+     * @param coachDto
+     * @return
+     */
     @PutMapping
     public ResponseEntity updateCoach(@RequestBody CoachDto coachDto) {
         CoachDto ret;
@@ -73,6 +95,11 @@ public class CoachController {
         return ResponseEntity.ok().body(ret);
     }
 
+    /**
+     * deletes coach by id
+     * @param id
+     * @return
+     */
     @DeleteMapping
     public ResponseEntity deleteCoach(@RequestParam Long id) {
         try {

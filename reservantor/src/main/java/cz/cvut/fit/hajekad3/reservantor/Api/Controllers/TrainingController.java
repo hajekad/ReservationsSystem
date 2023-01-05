@@ -21,6 +21,11 @@ public class TrainingController {
 
     public TrainingController() {}
 
+    /**
+     * Creates an instantion of training in the database, idCoach has to exist and same goes for idPlace
+     * @param trainingDto
+     * @return
+     */
     @PostMapping
     public ResponseEntity postTraining(@RequestBody CreateTrainingDto trainingDto) {
         TrainingDto ret;
@@ -35,6 +40,11 @@ public class TrainingController {
         return ResponseEntity.created(URI.create(ret.getId().toString())).body(ret);
     }
 
+    /**
+     * Gets Training by id
+     * @param id
+     * @return
+     */
     @GetMapping
     public ResponseEntity getTraining(@RequestParam Long id) {
         TrainingDto ret;
@@ -49,6 +59,11 @@ public class TrainingController {
         return ResponseEntity.ok(ret);
     }
 
+    /**
+     * updates training, all ids have to already exist
+     * @param trainingDto
+     * @return
+     */
     @PutMapping
     public ResponseEntity updateTraining(@RequestBody TrainingDto trainingDto) {
         TrainingDto ret;
@@ -63,6 +78,11 @@ public class TrainingController {
         return ResponseEntity.ok().body(ret);
     }
 
+    /**
+     * deletes training by id
+     * @param id
+     * @return
+     */
     @DeleteMapping
     ResponseEntity deleteTraining(@RequestParam Long id) {
         try {
