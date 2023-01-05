@@ -6,6 +6,7 @@ import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions
 import cz.cvut.fit.hajekad3.reservantor.InfrastructureLayer.Storage.Abstractions.ITrainingRepositoryJpa;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
+import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,9 +27,23 @@ public class PlaceService {
     }
 
     public PlaceDto savePlace(CreatePlaceDto placeDto) {
-        Place newPlace = new Place(placeDto);
+        Place newPlace;
 
-        Place ret = placeRepository.save(newPlace);
+        try {
+            newPlace = new Place(placeDto);
+        }
+        catch(NoSuchElementException e) {
+            throw new NoSuchElementException();
+        }
+
+        Place ret;
+
+        try {
+            ret = placeRepository.save(newPlace);
+        }
+        catch(PropertyValueException e) {
+            throw new NoSuchElementException();
+        }
 
         return ret.convertToDto();
     }
@@ -43,7 +58,7 @@ public class PlaceService {
     }
 
     public PlaceDto updatePlace(PlaceDto placeDto) {
-        if(!placeRepository.existsById(placeDto.getId()))
+        if(placeDto.getId() == null || !placeRepository.existsById(placeDto.getId()))
             throw new NoSuchElementException("Error: Place does not exist. id: " + placeDto.getId());
 
         Place currPlace = new Place(placeDto);

@@ -60,11 +60,10 @@ public class Training {
         participatingTrainees = new ArrayList<Trainee>();
         setDateOfTraining(Timestamp.valueOf(trainingDto.getDateOfTraining()));
         setDescription(trainingDto.getDescription());
-        Long idCoach = trainingDto.getIdCoach();
     }
 
     public Training(TrainingDto trainingDto) {
-        if(!validateTimestamp(trainingDto.getDateOfTraining()))
+        if(trainingDto.getId() == null || !validateTimestamp(trainingDto.getDateOfTraining()))
             throw new NoSuchElementException();
 
         participatingTrainees = new ArrayList<Trainee>();

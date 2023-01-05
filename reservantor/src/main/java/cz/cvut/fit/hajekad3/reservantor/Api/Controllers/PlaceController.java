@@ -3,6 +3,7 @@ package cz.cvut.fit.hajekad3.reservantor.Api.Controllers;
 import cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations.PlaceService;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.PlaceDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Place.CreatePlaceDto;
+import org.hibernate.PropertyValueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,13 @@ public class PlaceController {
 
     @PostMapping
     public ResponseEntity postPlace(@RequestBody CreatePlaceDto placeDto) {
-        PlaceDto ret = placeService.savePlace(placeDto);
+        PlaceDto ret;
+        try {
+            ret = placeService.savePlace(placeDto);
+        }
+        catch(NoSuchElementException e) {
+            return ResponseEntity.badRequest().build();
+        }
 
         return ResponseEntity.created(URI.create(ret.getId().toString())).body(ret);
     }

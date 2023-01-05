@@ -61,7 +61,7 @@ public class TrainingService {
     }
 
     public TrainingDto updateTraining(TrainingDto trainingDto) {
-        if(!trainingRepository.existsById(trainingDto.getId()))
+        if(trainingDto.getId() == null || !trainingRepository.existsById(trainingDto.getId()))
             throw new NoSuchElementException("Error: Training does not exist. id: " + trainingDto.getId());
 
         Training currTraining = new Training(trainingDto);

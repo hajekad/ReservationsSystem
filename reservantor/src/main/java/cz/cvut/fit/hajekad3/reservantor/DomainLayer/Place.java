@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 @Entity (name = "Place")
 public class Place {
@@ -30,6 +31,9 @@ public class Place {
         trainings = new ArrayList<Training>();
         setLatitude(placeDto.getLatitude());
         setLongitude(placeDto.getLongitude());
+
+        if(latitude == null || longitude == null)
+            throw new NoSuchElementException();
     }
 
     public Place(PlaceDto placeDto) {
