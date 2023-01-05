@@ -1,21 +1,24 @@
-package cz.cvut.fit.hajekad3.reservantor;
+package cz.cvut.fit.hajekad3.reservantor.Acceptance;
 
 import cz.cvut.fit.hajekad3.reservantor.Api.Controllers.CoachController;
 import cz.cvut.fit.hajekad3.reservantor.ApplicationLayer.Implementations.CoachService;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CoachDto;
 import cz.cvut.fit.hajekad3.reservantor.InterfaceLayer.Dtos.Coach.CreateCoachDto;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import static org.mockito.Mockito.*;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class CoachAcceptanceTests {
     @Mock
